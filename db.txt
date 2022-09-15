@@ -1,0 +1,30 @@
+- Collections:
+    1. Users
+        - _id
+        - userName: string
+        - email: string
+        - password: string (hashed)
+    2. Sessions
+        - _id:
+        - session (cookies): string
+        - expires: datetime
+	3. Groups
+        - _id
+        - owner: user _id
+        - group_id: string (url)
+        - group_password: string (hashed)
+        - group: object
+            - <person name>: object
+                - contribution: number
+                - split: percentage
+                - share: number
+            ...
+        - expenses: object
+            - <person name>: object
+                - <expense id>: object
+                    - cost: number
+                    - category: string
+                    - description: string
+                    - date: datetime
+            ...
+        - created: datetime

@@ -1,0 +1,17 @@
+Features:
+- Calculate how best to split expenses among n people
+	- Including asymmetrical splits
+		- E.g., based on hours worked (tips) or %
+
+- Calculate best way to balance uneven expenses in the least number of transactions
+
+
+- Calculate how best to split rooms / expenses using a bidding system
+	- Requires backend with the features in the next point.
+
+- Have the ability to log in:
+	- Store: Expenses, date, category
+	- Store: expenses across multiple groups
+	- Settings/profile page
+
+- Have the ability to share a link w/ a password to friends so that they can input into the sheet without creating an account.

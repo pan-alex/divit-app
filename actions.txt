@@ -1,0 +1,28 @@
+main
+|- /
+	 \ get -> get main page. I.e., main group (redirect to /divit)
+|- /login
+	|- get	-> directs to login page, unless user is already logged in.
+	 \ post	-> authenticate user login
+|- /logout
+	 \ get	-> log user out, destory session
+|- /signup
+	|- get	-> direct to signup page
+	 \ post	-> validate sign up info. Add user to database
+
+divit
+|- /
+	|- get -> get group data
+|- /new
+	|- post -> create a new group
+|- /member
+	|- post -> add group member
+	|- put -> rename group member
+	|- delete -> delete group member (and all associated expenses)
+|- /update
+	/ put -> update/upsert group fields
+	/ delete -> delete an expense
+|- /balance
+	/ put -> Reset `share` to 0 for all group members by adding a "repayment" expense to all group members according to their outstanding `share`.
+|- /deleteGroup
+	/ delete -> delete group
