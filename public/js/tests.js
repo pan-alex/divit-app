@@ -56,3 +56,25 @@ calculateRepayments(group4)
 // Person class methods work
 group4['A'].addTransaction(10)
 calculateShare(group4) // A contribution: 30
+
+
+
+// Store in local storage
+localStorage.removeItem('group')
+location.reload()
+
+group.add('A', 20)
+group.add('B', 20)
+group.add('C', 40)
+group.add('D', 15)
+group['A'].addTransaction(20)
+group['B'].addTransaction(10)
+group['D'].addTransaction(40)
+calculateRepayments(group)
+group.toLocalStorage()
+
+// Retrieval from local storage
+delete group
+location.reload()
+
+console.log(group)

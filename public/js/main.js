@@ -3,8 +3,6 @@ function m(n) {
     // Longer term use actual currency data types.
     return Number(n.toFixed(2))
 }
-// const m = new Intl.NumberFormat('en-US', {maximumFractionDigits: 2})
-
 
 class Group {
     constructor() {
@@ -15,10 +13,12 @@ class Group {
         } else {
             alert('That name is already being used.')
         }
+        return this[name]
     }
 
     delete(name) {
         delete this[name]
+        return this
     }
 
     objToGroup(obj) {
@@ -27,6 +27,15 @@ class Group {
             obj[person] = Object.assign(new Person(), obj[person])
         }
         return obj
+    }
+
+    toLocalStorage() {
+        localStorage.setItem('group', JSON.stringify(this))
+        return this
+    }
+
+    fromLocalStorage() {
+        return this.objToGroup(JSON.parse(localStorage.getItem('group'))) || new Group()
     }
 }
 
@@ -37,6 +46,7 @@ class Person {
         this.split = split;
         this.transactions = []
     }
+
     addTransaction(cost, category, description, date) {
         this.transactions.push({
             cost: m(cost),
@@ -45,9 +55,12 @@ class Person {
             date: date
         })
         this.contribution = m(this.contribution + cost)
+        return this
     }
+
     changeSplit(newSplit) {
         this.split = newSplit;
+        return this.split
     }
 }
 
@@ -102,3 +115,9 @@ function calculateRepayments(group) {
     } while (payers.length > 0 && receivers.length > 0)
     return repayments
 }
+
+
+
+group = Group.prototype.fromLocalStorage()
+
+
