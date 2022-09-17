@@ -134,11 +134,11 @@ function addPeopleToDOM() {
         let div = document.createElement('div')
 
         let nameField = document.createElement('input')
-        nameField.setAttribute('id', person + 'Name')
+        // nameField.setAttribute('id', person + 'Name')
         nameField.setAttribute('value', person)
 
         let splitField = document.createElement('input')
-        splitField.setAttribute('id', person + 'Split')
+        // splitField.setAttribute('id', person + 'Split')
         splitField.setAttribute('value', group[person].split)
 
         let updateButton = document.createElement('button')
@@ -175,19 +175,19 @@ function submitBtnTransaction(parent, person) {
     let div = document.createElement('div')
 
     let cost = document.createElement('input')
-    cost.setAttribute('id', '#transactionCost')
+    // cost.setAttribute('id', '#transactionCost')
     cost.setAttribute('placeholder', 'Cost')
 
     let category = document.createElement('input')
-    category.setAttribute('id', '#transactionCategory')
+    // category.setAttribute('id', '#transactionCategory')
     category.setAttribute('placeholder', 'Category')
 
     let description = document.createElement('input')
-    description.setAttribute('id', '#transactionDescription')
+    // description.setAttribute('id', '#transactionDescription')
     description.setAttribute('placeholder', 'Description')
 
     let date = document.createElement('input')
-    date.setAttribute('id', '#transactionDate')
+    // date.setAttribute('id', '#transactionDate')
     date.setAttribute('type', 'date')
     date.value = new Date().toISOString().slice(0,10)
 
@@ -195,7 +195,10 @@ function submitBtnTransaction(parent, person) {
     submitBtn.innerText = 'Submit Transaction'
     submitBtn.addEventListener('click', function() {
         group[person].addTransaction(cost.value, category.value, description.value, date.value)
-        [cost.value, category.value, description.value, date.value, person.value] = ['', '', '', '', '']
+        cost.value = ''
+        category.value = ''
+        description.value = ''
+        date.value = ''
     })
 
     parent.appendChild(div)
@@ -224,3 +227,4 @@ addPeopleToDOM()
 
 createPersonBtn.addEventListener('click', addPerson)
 repaymentsBtn.addEventListener('click', repaymentsToDOM)
+resetGroupBtn.addEventListener('click', function() {group = new Group(); addPeopleToDOM()})
