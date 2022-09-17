@@ -79,6 +79,7 @@ function calculateRepayments(group) {
     }
     let payers = people.filter( a => a[1] < 0).sort( (a,b) => a[1] - b[1]);
     let receivers  = people.filter( a => a[1] > 0).sort( (a,b) => b[1] - a[1]);
+    if ( payers.length < 1  || receivers.length < 1) return []
 
     let repayments = []
     do {
