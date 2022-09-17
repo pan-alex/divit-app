@@ -6,60 +6,89 @@ function m(n) {
 // const m = new Intl.NumberFormat('en-US', {maximumFractionDigits: 2})
 
 
-
-function calculateShare(group) {
-     // Parameters:
-        // group: Object where each property is an object representing a person. The object has the properties:
-            // contrib: Number. Amount contributed to group.
-            // split: Number. Proportion of the total that they are responsible for. Splits converted to percentages of the splitSum.
-    // Returns:
-        // group: Modifies the input object to add the follpayer property:
-            // credit: Number. The amount receiver to the group, based on their contribution minus what they are responsible for (sum * split).
-            // The sum of credit for all perople is 0.
-    let sum = Object.values(group).reduce( (sum, person) => sum + person.contribution, 0);
-    let splitSum = Object.values(group).reduce( (splitSum, person) => splitSum + person.split, 0);
-    for (i in group) {
-        group[i].split = group[i].split / splitSum
-        group[i].credit = m(group[i].contribution - sum * group[i].split)
+class Group {
+    constructor() {
     }
-    return group
+    add(name, split) {
+        if (!this[name]) {
+            this[name] = new Person(name, split)
+        } else {
+            alert('That name is already being used.')
+        }
+    }
+    delete(name) {
+        delete this[name]
+    }
+
+    calculateShare() {
+        // Returns:
+        // this: Modifies the input object to add the following property:
+            // credit: Number. The amount receiver to the this, based on their contribution minus what they are responsible for (sum * split).
+                // The sum of credit for all perople is 0.
+            // split: Modifies this number to reflect a percentage of the total group.
+        let sum = Object.values(this).reduce( (sum, person) => sum + person.contribution, 0);
+        let splitSum = Object.values(this).reduce( (splitSum, person) => splitSum + person.split, 0);
+        for (let person in this) {
+            this[person].split = this[person].split / splitSum
+            this[person].credit = m(this[person].contribution - sum * this[person].split)
+        }
+        return this
+     }
+    calculateRepayments() {
+        // Returns:
+            // repayments: Array representing the repayments each person should make so that no one owes anyone money.
+                // Each element is a subarray representing one payment. It has the format [P, R, Amt] where P = payer, R = receiver, Amt = amount to pay.
+                // A greedy approach is utilized where the person with the least credit pays the person with the most credit until all debts are paid.
+        this.calculateShare()
+        let people = []
+        for (let person in this) {
+            people.push([person, this[person].credit]) // format: [name, credit]
+        }
+        let payers = people.filter( a => a[1] < 0).sort( (a,b) => a[1] - b[1]);
+        let receivers  = people.filter( a => a[1] > 0).sort( (a,b) => b[1] - a[1]);
+
+        let repayments = []
+        do {
+            // Pay off the person with the most credit
+            let payer = payers[0];
+            let receiver = receivers[0];
+            let diff = +receiver[1] + +payer[1]
+            if (diff < 0) {
+                payer[1] =  m(payer[1] + receiver[1]);
+                repayments.push( [payer[0], receiver[0], m(receiver[1])] )
+                receivers.shift()
+            } else if (diff > 0) {
+                receiver[1] = m(receiver[1] + payer[1]);
+                repayments.push( [payer[0], receiver[0], m(-payer[1])] )
+                payers.shift()
+            } else {
+                repayments.push( [payer[0], receiver[0], m(receiver[1])] )
+                receivers.shift()
+                payers.shift()
+            }
+        } while (payers.length > 0 && receivers.length > 0)
+        return repayments
+    }
 }
 
-
-function calculateRepayments(group) {
-    // Parameters:
-        // group: Object where each property is an object representing a person.
-    // Returns:
-        // repayments: Array representing the repayments each person should make so that no one owes anyone money.
-            // Each element is a subarray representing one payment. It has the format [P, R, Amt] where P = payer, R = receiver, Amt = amount to pay.
-            // A greedy approach is utilized where the person with the least credit pays the person with the most credit until all debts are paid.
-    let people = []
-    for (person in group) {
-        people.push([person, group[person].credit]) // format: [name, credit]
+class Person {
+    constructor(name, split) {
+        this.name = name;
+        this.contribution = 0;
+        this.split = split;
+        this.transactions = []
     }
-    payers = people.filter( a => a[1] < 0).sort( (a,b) => a[1] - b[1]); // Sort lowest to highest credit
-    receivers  = people.filter( a => a[1] > 0).sort( (a,b) => b[1] - a[1]); // Sort highest to lowest credit
-
-    let repayments = []
-    do {
-        // Pay off the person with the most credit
-        let payer = payers[0];
-        let receiver = receivers[0];
-        let diff = +receiver[1] + +payer[1]
-        if (diff < 0) {
-            payer[1] =  m(payer[1] + receiver[1]);
-            repayments.push( [payer[0], receiver[0], m(receiver[1])] )
-            receivers.shift()
-        } else if (diff > 0) {
-            receiver[1] = m(receiver[1] + payer[1]);
-            repayments.push( [payer[0], receiver[0], m(-payer[1])] )
-            payers.shift()
-        } else {
-            repayments.push( [payer[0], receiver[0], m(receiver[1])] )
-            receivers.shift()
-            payers.shift()
-        }
-    } while (payers.length > 0 && receivers.length > 0)
-    return repayments
+    addTransaction(cost, category, description, date) {
+        this.transactions.push({
+            cost: m(cost),
+            category: category,
+            description: description,
+            date: date
+        })
+        this.contribution = m(this.contribution + cost)
+    }
+    changeSplit(newSplit) {
+        this.split = newSplit;
+    }
 }
 
