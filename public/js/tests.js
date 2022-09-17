@@ -59,7 +59,8 @@ calculateShare(group4) // A contribution: 30
 
 
 
-// Store in local storage
+// Test Store in local storage
+// Test that all Group-level and Person-level methods update local storage.
 localStorage.removeItem('group')
 location.reload()
 
@@ -67,14 +68,26 @@ group.add('A', 20)
 group.add('B', 20)
 group.add('C', 40)
 group.add('D', 15)
+JSON.parse(localStorage.getItem('group')) // Object contains people
+
 group['A'].addTransaction(20)
 group['B'].addTransaction(10)
 group['D'].addTransaction(40)
+JSON.parse(localStorage.getItem('group')) // People now have transactions
+
 calculateRepayments(group)
-group.toLocalStorage()
+
+group['C'].changeSplit(20)
+JSON.parse(localStorage.getItem('group')) // People have credit. C now has split 20
+
+group.delete('D')
+JSON.parse(localStorage.getItem('group')) // D doesn't exist
+
 
 // Retrieval from local storage
 delete group
 location.reload()
 
 console.log(group)
+
+

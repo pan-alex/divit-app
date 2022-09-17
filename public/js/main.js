@@ -13,11 +13,13 @@ class Group {
         } else {
             alert('That name is already being used.')
         }
+        this.toLocalStorage(this)
         return this[name]
     }
 
     delete(name) {
         delete this[name]
+        this.toLocalStorage(this)
         return this
     }
 
@@ -29,9 +31,9 @@ class Group {
         return obj
     }
 
-    toLocalStorage() {
-        localStorage.setItem('group', JSON.stringify(this))
-        return this
+    toLocalStorage(obj) {
+        localStorage.setItem('group', JSON.stringify(obj))
+        return obj
     }
 
     fromLocalStorage() {
@@ -55,35 +57,35 @@ class Person {
             date: date
         })
         this.contribution = m(this.contribution + cost)
+        Group.prototype.toLocalStorage(group)
         return this
     }
 
     changeSplit(newSplit) {
         this.split = newSplit;
+        Group.prototype.toLocalStorage(group)
         return this.split
     }
 }
 
 
 function calculateShare(group) {
-    // Returns:
-    // this: Modifies the input object to add the following property:
-        // credit: Number. The amount receiver to the this, based on their contribution minus what they are responsible for (sum * split).
-            // The sum of credit for all perople is 0.
-        // split: Modifies this number to reflect a percentage of the total group.
+// Returns:
+// this: Modifies the input object to add the following property:
+    // credit: Number. The amount receiver to the this, based on their contribution minus what they are responsible for (sum * split). The sum of credit for all perople is 0.
     let sum = Object.values(group).reduce( (sum, person) => sum + person.contribution, 0);
     let splitSum = Object.values(group).reduce( (splitSum, person) => splitSum + person.split, 0);
     for (let person in group) {
         group[person].credit = m(group[person].contribution - sum * group[person].split/splitSum)
     }
+    Group.prototype.toLocalStorage(group)
     return group
  }
 
 function calculateRepayments(group) {
-    // Returns:
-        // repayments: Array representing the repayments each person should make so that no one owes anyone money.
-            // Each element is a subarray representing one payment. It has the format [P, R, Amt] where P = payer, R = receiver, Amt = amount to pay.
-            // A greedy approach is utilized where the person with the least credit pays the person with the most credit until all debts are paid.
+// Returns:
+    // repayments: Array representing the repayments each person should make so that no one owes anyone money. Each element is a subarray representing one payment. It has the format [P, R, Amt] where P = payer, R = receiver, Amt = amount to pay.
+    // A greedy approach is utilized where the person with the least credit pays the person with the most credit until all debts are paid.
     calculateShare(group)
     let people = []
     for (let person in group) {
@@ -95,7 +97,6 @@ function calculateRepayments(group) {
 
     let repayments = []
     do {
-        // Pay off the person with the most credit
         let payer = payers[0];
         let receiver = receivers[0];
         let diff = +receiver[1] + +payer[1]
