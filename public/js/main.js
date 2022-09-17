@@ -175,19 +175,12 @@ function submitBtnTransaction(parent, person) {
     let div = document.createElement('div')
 
     let cost = document.createElement('input')
-    // cost.setAttribute('id', '#transactionCost')
     cost.setAttribute('placeholder', 'Cost')
-
     let category = document.createElement('input')
-    // category.setAttribute('id', '#transactionCategory')
     category.setAttribute('placeholder', 'Category')
-
     let description = document.createElement('input')
-    // description.setAttribute('id', '#transactionDescription')
     description.setAttribute('placeholder', 'Description')
-
     let date = document.createElement('input')
-    // date.setAttribute('id', '#transactionDate')
     date.setAttribute('type', 'date')
     date.value = new Date().toISOString().slice(0,10)
 
