@@ -1,0 +1,23 @@
+html {
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+}
+
+
+section {
+    margin-top: 3rem;
+}
+
+#peopleHeaders {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#people > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
