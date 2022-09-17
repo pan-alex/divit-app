@@ -61,8 +61,7 @@ function calculateShare(group) {
     let sum = Object.values(group).reduce( (sum, person) => sum + person.contribution, 0);
     let splitSum = Object.values(group).reduce( (splitSum, person) => splitSum + person.split, 0);
     for (let person in group) {
-        group[person].split = group[person].split / splitSum
-        group[person].credit = m(group[person].contribution - sum * group[person].split)
+        group[person].credit = m(group[person].contribution - sum * group[person].split/splitSum)
     }
     return group
  }

@@ -9,8 +9,7 @@ calculateRepayments(group1) // ['B', 'A', 5]
 group1['B'].addTransaction(30) // ['A', 'B', 10]
 calculateRepayments(group1)
 // Updating splits
-group1['A'].changeSplit(0.25)
-group1['B'].changeSplit(0.75)
+group1['B'].changeSplit(1.5)
 calculateRepayments(group1)  // ['B', 'A', 5]
 // No one owes anyone
 group1['B'].addTransaction(20)
