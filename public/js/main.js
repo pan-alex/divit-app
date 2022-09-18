@@ -276,9 +276,11 @@ function expandPersonDetails(parent, name) {
 }
 
 function repaymentsToDOM() {
-    let repayments = calculateRepayments(group)
     let div = document.querySelector('#repayments')
     div.innerHTML = ''
+
+    let repayments = calculateRepayments(group)
+    if (repayments.length < 1) div.innerHTML = 'No repayments required'
     for (let repayment of repayments) {
         let p = document.createElement('p')
         p.innerText = repayment[0] + ' owes ' + repayment[1] + ' $' + repayment[2]
