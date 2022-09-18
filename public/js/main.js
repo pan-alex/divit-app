@@ -126,29 +126,35 @@ function calculateRepayments(group) {
 }
 
 
-function addPeopleToDOM() {
+function peopleToDOM() {
     people = document.querySelector('#people')
     people.innerHTML = ''
     // Create a div containing the name and split of each person in the group
-    for (let person in group) {
+    for (let name in group) {
         let div = document.createElement('div')
+        div.classList.add('person')
+        let detailsDiv = document.createElement('div')
+        detailsDiv.classList.add('details')
+
+        let expandBtn = document.createElement('button')
+        expandBtn.innerText = 'Expand'
+        expandBtn.addEventListener('click', function() { expandPersonDetails(detailsDiv, name) })
 
         let nameField = document.createElement('input')
-        // nameField.setAttribute('id', person + 'Name')
-        nameField.setAttribute('value', person)
+        nameField.setAttribute('value', name)
 
         let splitField = document.createElement('input')
-        // splitField.setAttribute('id', person + 'Split')
-        splitField.setAttribute('value', group[person].split)
+        splitField.setAttribute('value', group[name].split)
 
-        let updateButton = document.createElement('button')
-        updateButton.innerText = 'Update'
-        updateButton.addEventListener( 'click', function() {group[person].updatePerson(nameField.value, splitField.value)} )
+        let updateBtn = document.createElement('button')
+        updateBtn.innerText = 'Update'
+        updateBtn.addEventListener( 'click', function() {group[name].updatePerson(nameField.value, splitField.value)} )
         people.appendChild(div)
+        div.appendChild(expandBtn)
         div.appendChild(nameField)
         div.appendChild(splitField)
-        div.appendChild(updateButton)
-        expandTransactions(div, person)
+        div.appendChild(updateBtn)
+        div.appendChild(detailsDiv)
     }
 }
 
@@ -156,50 +162,101 @@ function addPerson() {
     let name = document.querySelector("#personName");
     let split = document.querySelector("#personSplit");
     group.add(name.value, split.value);
-    addPeopleToDOM()
+    peopleToDOM()
     name.value = '';
     split.value = '';
 }
 
+function personTransactionsToDOM(parent, name) {
+    parent.innerHTML = ''
+    let transactions = group[name].transactions //.sort( (a,b) => b.date >= a.date)
 
-function expandTransactions(parent, person) {
-    let div = document.createElement('div')
-    let addTransactionBtn = document.createElement('button')
-    addTransactionBtn.innerText = 'Add Transaction'
-    addTransactionBtn.addEventListener('click', function() {submitBtnTransaction(parent, person)})
-    parent.appendChild(div)
-    div.appendChild(addTransactionBtn)
+    for (t in transactions) {
+        let div = document.createElement('div')
+        div.classList.add('transaction')
+
+        let cost = document.createElement('input')
+        cost.setAttribute('value', transactions[t].cost)
+
+        let category = document.createElement('input')
+        category.setAttribute('value', transactions[t].category)
+
+        let description = document.createElement('input')
+        description.setAttribute('value', transactions[t].description)
+
+        let date = document.createElement('input')
+        date.setAttribute('type', 'date')
+        date.setAttribute('value', transactions[t].date)
+
+        // let updateBtn = document.createElement('button')
+        // updateBtn.innerText = 'Update'
+        // updateBtn.addEventListener( 'click', function() {
+        //     transactions[t].cost = cost.value;
+        //     transactions[t].category = category.value;
+        //     transactions[t].description = description.value;
+        //     transactions[t].date = date.value
+        // } )
+
+        // let deleteBtn = document.createElement('button')
+        // deleteBtn.innerText = 'Delete'
+        // deleteBtn.addEventListener( 'click', function() {
+        //     transactions.splice(t, 1)
+        //     personTransactionsToDOM(parent, name)
+        // } )
+
+        parent.append(div)
+        div.appendChild(date)
+        div.appendChild(cost)
+        div.appendChild(category)
+        div.appendChild(description)
+        // div.appendChild(updateBtn)
+        // div.appendChild(deleteBtn)
+    }
 }
 
-function submitBtnTransaction(parent, person) {
-    let div = document.createElement('div')
+function expandPersonDetails(parent, name) {
+    if (parent.classList.contains('expanded')) {
+        parent.innerHTML = ''
+        parent.classList.remove('expanded')
+    } else {
+        let div = document.createElement('div')
+        let transactionsDiv = document.createElement('div')
+        transactionsDiv.classList.add('transactions')
 
-    let cost = document.createElement('input')
-    cost.setAttribute('placeholder', 'Cost')
-    let category = document.createElement('input')
-    category.setAttribute('placeholder', 'Category')
-    let description = document.createElement('input')
-    description.setAttribute('placeholder', 'Description')
-    let date = document.createElement('input')
-    date.setAttribute('type', 'date')
-    date.value = new Date().toISOString().slice(0,10)
+        let cost = document.createElement('input')
+        cost.setAttribute('placeholder', 'Cost')
 
-    let submitBtn = document.createElement('button')
-    submitBtn.innerText = 'Submit Transaction'
-    submitBtn.addEventListener('click', function() {
-        group[person].addTransaction(cost.value, category.value, description.value, date.value)
-        cost.value = ''
-        category.value = ''
-        description.value = ''
-        date.value = ''
-    })
+        let category = document.createElement('input')
+        category.setAttribute('placeholder', 'Category')
 
-    parent.appendChild(div)
-    div.appendChild(cost)
-    div.appendChild(category)
-    div.appendChild(description)
-    div.appendChild(date)
-    div.appendChild(submitBtn)
+        let description = document.createElement('input')
+        description.setAttribute('placeholder', 'Description')
+
+        let date = document.createElement('input')
+        date.setAttribute('type', 'date')
+        date.value = new Date().toISOString().slice(0,10)
+
+        let submitBtn = document.createElement('button')
+        submitBtn.innerText = 'Submit Transaction'
+        submitBtn.addEventListener('click', function() {
+            group[name].addTransaction(cost.value, category.value, description.value, date.value)
+            cost.value = ''
+            category.value = ''
+            description.value = ''
+            date.value = new Date().toISOString().slice(0,10)
+            personTransactionsToDOM(transactionsDiv, name)
+        })
+
+        parent.appendChild(div)
+        parent.classList.add('expanded')
+        div.appendChild(cost)
+        div.appendChild(category)
+        div.appendChild(description)
+        div.appendChild(date)
+        div.appendChild(submitBtn)
+        div.appendChild(transactionsDiv)
+        personTransactionsToDOM(transactionsDiv, name)
+    }
 }
 
 function repaymentsToDOM() {
@@ -216,8 +273,8 @@ function repaymentsToDOM() {
 
 // On load
 group = Group.prototype.fromLocalStorage()
-addPeopleToDOM()
+peopleToDOM()
 
 createPersonBtn.addEventListener('click', addPerson)
 repaymentsBtn.addEventListener('click', repaymentsToDOM)
-resetGroupBtn.addEventListener('click', function() {group = new Group(); addPeopleToDOM()})
+resetGroupBtn.addEventListener('click', function() {group = new Group(); peopleToDOM()})

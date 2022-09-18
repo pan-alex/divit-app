@@ -17,7 +17,6 @@ section {
     grid-template-columns: 1fr 1fr;
 }
 
-#people > div {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+.person {
+    margin-bottom: 3rem;
 }
