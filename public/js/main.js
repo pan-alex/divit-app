@@ -62,6 +62,25 @@ class Person {
         return this
     }
 
+    updateTransaction(index, cost, category, description, date) {
+        cost = m(cost)
+        this.contribution = m(this.contribution + cost - this.transactions[index].cost)
+        this.transactions[index] = {
+            cost:cost,
+            category: category,
+            description: description,
+            date: date
+        }
+        Group.prototype.toLocalStorage(group)
+        return this
+    }
+
+    deleteTransaction(index) {
+        this.transactions.splice(index, 1)
+        Group.prototype.toLocalStorage(group)
+        return this
+    }
+
     changeSplit(newSplit) {
         this.split = newSplit;
         Group.prototype.toLocalStorage(group)
@@ -171,7 +190,7 @@ function personTransactionsToDOM(parent, name) {
     parent.innerHTML = ''
     let transactions = group[name].transactions //.sort( (a,b) => b.date >= a.date)
 
-    for (t in transactions) {
+    for (let t in transactions) {
         let div = document.createElement('div')
         div.classList.add('transaction')
 
@@ -188,29 +207,26 @@ function personTransactionsToDOM(parent, name) {
         date.setAttribute('type', 'date')
         date.setAttribute('value', transactions[t].date)
 
-        // let updateBtn = document.createElement('button')
-        // updateBtn.innerText = 'Update'
-        // updateBtn.addEventListener( 'click', function() {
-        //     transactions[t].cost = cost.value;
-        //     transactions[t].category = category.value;
-        //     transactions[t].description = description.value;
-        //     transactions[t].date = date.value
-        // } )
+        let updateBtn = document.createElement('button')
+        updateBtn.innerText = 'Update'
+        updateBtn.addEventListener( 'click', function() {
+            group[name].updateTransaction(t, cost.value, category.value, description.value, date.value)
+        } )
 
-        // let deleteBtn = document.createElement('button')
-        // deleteBtn.innerText = 'Delete'
-        // deleteBtn.addEventListener( 'click', function() {
-        //     transactions.splice(t, 1)
-        //     personTransactionsToDOM(parent, name)
-        // } )
+        let deleteBtn = document.createElement('button')
+        deleteBtn.innerText = 'Delete'
+        deleteBtn.addEventListener( 'click', function() {
+            group[name].deleteTransaction(t)
+            personTransactionsToDOM(parent, name)
+        } )
 
         parent.append(div)
         div.appendChild(date)
         div.appendChild(cost)
         div.appendChild(category)
         div.appendChild(description)
-        // div.appendChild(updateBtn)
-        // div.appendChild(deleteBtn)
+        div.appendChild(updateBtn)
+        div.appendChild(deleteBtn)
     }
 }
 
