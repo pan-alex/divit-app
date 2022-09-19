@@ -120,27 +120,27 @@ function calculateRepayments(group) {
     calculateShare(group)
     let people = []
     for (let person in group) {
-        people.push([person, group[person].credit]) // format: [name, credit]
+        people.push({'name': person, 'credit': group[person].credit})
     }
-    let payers = people.filter( a => a[1] < 0).sort( (a,b) => a[1] - b[1]);
-    let receivers  = people.filter( a => a[1] > 0).sort( (a,b) => b[1] - a[1]);
+    let payers = people.filter( a => a.credit < 0).sort( (a,b) => a.credit - b.credit);
+    let receivers  = people.filter( a => a.credit > 0).sort( (a,b) => b.credit - a.credit);
     if ( payers.length < 1  || receivers.length < 1) return []
 
     let repayments = []
     do {
         let payer = payers[0];
-        let receiver = receivers[0];
-        let diff = +receiver[1] + +payer[1]
+        let receiver = receivers[0]
+        let diff = +receiver.credit + +payer.credit
         if (diff < 0) {
-            payer[1] =  m(payer[1] + receiver[1]);
-            repayments.push( [payer[0], receiver[0], m(receiver[1])] )
+            payer.credit =  m(payer.credit + receiver.credit);
+            repayments.push( [payer.name, receiver.name, m(receiver.credit)] )
             receivers.shift()
         } else if (diff > 0) {
-            receiver[1] = m(receiver[1] + payer[1]);
-            repayments.push( [payer[0], receiver[0], m(-payer[1])] )
+            receiver.credit = m(receiver.credit + payer.credit);
+            repayments.push( [payer.name, receiver.name, m(-payer.credit)] )
             payers.shift()
         } else {
-            repayments.push( [payer[0], receiver[0], m(receiver[1])] )
+            repayments.push( [payer.name, receiver.name, m(receiver.credit)] )
             receivers.shift()
             payers.shift()
         }
