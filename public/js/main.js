@@ -23,6 +23,23 @@ class Group {
         return this
     }
 
+    updatePerson(name, newName, newSplit) {
+        if (newSplit) {
+            this[name].split = newSplit
+        }
+        if (newName && name != newName) {
+            if (!this[newName]) {
+                this[newName] = this[name]
+                this[newName].name = newName
+                delete this[name]
+            } else {
+                alert('That name is already being used.')
+            }
+        }
+        this.toLocalStorage(this)
+        return this
+    }
+
     objToGroup(obj) {
         obj = Object.assign(new Group(), obj)
         for (let person in obj) {
@@ -77,19 +94,6 @@ class Person {
 
     deleteTransaction(index) {
         this.transactions.splice(index, 1)
-        Group.prototype.toLocalStorage(group)
-        return this
-    }
-
-    changeSplit(newSplit) {
-        this.split = newSplit;
-        Group.prototype.toLocalStorage(group)
-        return this.split
-    }
-
-    updatePerson(newName, newSplit) {
-        this.name = newName;
-        this.split = newSplit;
         Group.prototype.toLocalStorage(group)
         return this
     }
@@ -167,7 +171,10 @@ function peopleToDOM() {
 
         let updateBtn = document.createElement('button')
         updateBtn.innerText = 'Update'
-        updateBtn.addEventListener( 'click', function() {group[name].updatePerson(nameField.value, splitField.value)} )
+        updateBtn.addEventListener( 'click', function() {
+            group.updatePerson(name, nameField.value, splitField.value)
+            location.reload() // reload the page to update the DOM
+        } )
         people.appendChild(div)
         div.appendChild(expandBtn)
         div.appendChild(nameField)
