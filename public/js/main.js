@@ -93,6 +93,7 @@ class Person {
     }
 
     deleteTransaction(index) {
+        this.contribution = m(this.contribution - this.transactions[index].cost)
         this.transactions.splice(index, 1)
         Group.prototype.toLocalStorage(group)
         return this
