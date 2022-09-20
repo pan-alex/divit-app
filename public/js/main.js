@@ -286,9 +286,9 @@ function addPersonfromDOM() {
     let name = document.querySelector("#personName");
     let split = document.querySelector("#personSplit");
     group.addPerson(name.value, split.value);
-    location.reload()
     name.value = '';
     split.value = '';
+    location.reload()
 }
 
 function repaymentsToDOM() {
@@ -313,6 +313,6 @@ createPersonBtn.addEventListener('click', addPersonfromDOM)
 repaymentsBtn.addEventListener('click', repaymentsToDOM)
 resetGroupBtn.addEventListener('click', function() {
     group = new Group()
-    group.toLocalStorage()
+    Group.prototype.toLocalStorage(group)
     location.reload()
 })
