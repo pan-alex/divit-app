@@ -5,13 +5,11 @@ function m(n) {
 }
 
 class Group {
-    constructor() {
-    }
     addPerson(name, split) {
-        if (!this[name]) {
+        if (name && !this[name]) {
             this[name] = new Person(name, split)
         } else {
-            alert('That name is already being used.')
+            alert('Enter a name that is not already in use.')
         }
         this.toLocalStorage(this)
         return this[name]
@@ -150,7 +148,7 @@ class Person {
 }
 
 
-
+// DOM functions
 function peopleToDOM() {
     people = document.querySelector('#people')
     people.innerHTML = ''
@@ -175,13 +173,22 @@ function peopleToDOM() {
         updateBtn.innerText = 'Update'
         updateBtn.addEventListener( 'click', function() {
             group.updatePerson(name, nameField.value, splitField.value)
-            location.reload() // reload the page to update the DOM
+            location.reload()
         } )
+
+        let deleteBtn = document.createElement('button')
+        deleteBtn.innerText = 'Delete'
+        deleteBtn.addEventListener( 'click', function() {
+            group.deletePerson(name)
+            location.reload()
+        } )
+
         people.appendChild(div)
         div.appendChild(expandBtn)
         div.appendChild(nameField)
         div.appendChild(splitField)
         div.appendChild(updateBtn)
+        div.appendChild(deleteBtn)
         div.appendChild(detailsDiv)
     }
 }
@@ -279,7 +286,7 @@ function addPersonfromDOM() {
     let name = document.querySelector("#personName");
     let split = document.querySelector("#personSplit");
     group.addPerson(name.value, split.value);
-    peopleToDOM()
+    location.reload()
     name.value = '';
     split.value = '';
 }
