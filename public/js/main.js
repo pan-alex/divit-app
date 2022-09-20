@@ -7,7 +7,7 @@ function m(n) {
 class Group {
     constructor() {
     }
-    add(name, split) {
+    addPerson(name, split) {
         if (!this[name]) {
             this[name] = new Person(name, split)
         } else {
@@ -17,7 +17,7 @@ class Group {
         return this[name]
     }
 
-    delete(name) {
+    deletePerson(name) {
         delete this[name]
         this.toLocalStorage(this)
         return this
@@ -56,7 +56,6 @@ class Group {
     fromLocalStorage() {
         return this.objToGroup(JSON.parse(localStorage.getItem('group'))) || new Group()
     }
-
 
     calculateShare() {
     // Returns:
@@ -151,6 +150,7 @@ class Person {
 }
 
 
+
 function peopleToDOM() {
     people = document.querySelector('#people')
     people.innerHTML = ''
@@ -184,15 +184,6 @@ function peopleToDOM() {
         div.appendChild(updateBtn)
         div.appendChild(detailsDiv)
     }
-}
-
-function addPerson() {
-    let name = document.querySelector("#personName");
-    let split = document.querySelector("#personSplit");
-    group.add(name.value, split.value);
-    peopleToDOM()
-    name.value = '';
-    split.value = '';
 }
 
 function personTransactionsToDOM(parent, name) {
@@ -284,6 +275,15 @@ function expandPersonDetails(parent, name) {
     }
 }
 
+function addPersonfromDOM() {
+    let name = document.querySelector("#personName");
+    let split = document.querySelector("#personSplit");
+    group.addPerson(name.value, split.value);
+    peopleToDOM()
+    name.value = '';
+    split.value = '';
+}
+
 function repaymentsToDOM() {
     let div = document.querySelector('#repayments')
     div.innerHTML = ''
@@ -302,6 +302,6 @@ function repaymentsToDOM() {
 group = Group.prototype.fromLocalStorage()
 peopleToDOM()
 
-createPersonBtn.addEventListener('click', addPerson)
+createPersonBtn.addEventListener('click', addPersonfromDOM)
 repaymentsBtn.addEventListener('click', repaymentsToDOM)
 resetGroupBtn.addEventListener('click', function() {group = new Group(); peopleToDOM()})
