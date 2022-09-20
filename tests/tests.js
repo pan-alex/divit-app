@@ -1,3 +1,5 @@
+// Tests for public/main.js
+
 // Simple group
 group1 = new Group()
 group1.add('A', 0.5)
