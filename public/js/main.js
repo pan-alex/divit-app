@@ -311,4 +311,8 @@ peopleToDOM()
 
 createPersonBtn.addEventListener('click', addPersonfromDOM)
 repaymentsBtn.addEventListener('click', repaymentsToDOM)
-resetGroupBtn.addEventListener('click', function() {group = new Group(); peopleToDOM()})
+resetGroupBtn.addEventListener('click', function() {
+    group = new Group()
+    group.toLocalStorage()
+    location.reload()
+})
