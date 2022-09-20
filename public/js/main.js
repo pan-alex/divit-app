@@ -56,6 +56,56 @@ class Group {
     fromLocalStorage() {
         return this.objToGroup(JSON.parse(localStorage.getItem('group'))) || new Group()
     }
+
+
+    calculateShare() {
+    // Returns:
+    // this: Modifies the input object to add the following property:
+        // credit: Number. The amount receiver to the this, based on their contribution minus what they are responsible for (sum * split). The sum of credit for all perople is 0.
+        let sum = Object.values(this).reduce( (sum, person) => sum + person.contribution, 0);
+        let splitSum = Object.values(this).reduce( (splitSum, person) => splitSum + +person.split, 0);
+        for (let person in this) {
+            this[person].credit = m(this[person].contribution - sum * this[person].split/splitSum)
+        }
+        Group.prototype.toLocalStorage(this)
+        return this
+     }
+
+    calculateRepayments() {
+    // Returns:
+        // repayments: Array representing the repayments each person should make so that no one owes anyone money. Each element is a subarray representing one payment. It has the format [P, R, Amt] where P = payer, R = receiver, Amt = amount to pay.
+        // A greedy approach is utilized where the person with the least credit pays the person with the most credit until all debts are paid.
+        this.calculateShare()
+        let people = []
+        for (let person in this) {
+            people.push({'name': person, 'credit': this[person].credit})
+        }
+        let payers = people.filter( a => a.credit < 0).sort( (a,b) => a.credit - b.credit);
+        let receivers  = people.filter( a => a.credit > 0).sort( (a,b) => b.credit - a.credit);
+        if ( payers.length < 1  || receivers.length < 1) return []
+
+        let repayments = []
+        do {
+            let payer = payers[0];
+            let receiver = receivers[0]
+            let diff = +receiver.credit + +payer.credit
+            if (diff < 0) {
+                payer.credit =  m(payer.credit + receiver.credit);
+                repayments.push( [payer.name, receiver.name, m(receiver.credit)] )
+                receivers.shift()
+            } else if (diff > 0) {
+                receiver.credit = m(receiver.credit + payer.credit);
+                repayments.push( [payer.name, receiver.name, m(-payer.credit)] )
+                payers.shift()
+            } else {
+                repayments.push( [payer.name, receiver.name, m(receiver.credit)] )
+                receivers.shift()
+                payers.shift()
+            }
+        } while (payers.length > 0 && receivers.length > 0)
+        return repayments
+    }
+
 }
 
 class Person {
@@ -98,55 +148,6 @@ class Person {
         Group.prototype.toLocalStorage(group)
         return this
     }
-}
-
-
-function calculateShare(group) {
-// Returns:
-// this: Modifies the input object to add the following property:
-    // credit: Number. The amount receiver to the this, based on their contribution minus what they are responsible for (sum * split). The sum of credit for all perople is 0.
-    let sum = Object.values(group).reduce( (sum, person) => sum + person.contribution, 0);
-    let splitSum = Object.values(group).reduce( (splitSum, person) => splitSum + +person.split, 0);
-    for (let person in group) {
-        group[person].credit = m(group[person].contribution - sum * group[person].split/splitSum)
-    }
-    Group.prototype.toLocalStorage(group)
-    return group
- }
-
-function calculateRepayments(group) {
-// Returns:
-    // repayments: Array representing the repayments each person should make so that no one owes anyone money. Each element is a subarray representing one payment. It has the format [P, R, Amt] where P = payer, R = receiver, Amt = amount to pay.
-    // A greedy approach is utilized where the person with the least credit pays the person with the most credit until all debts are paid.
-    calculateShare(group)
-    let people = []
-    for (let person in group) {
-        people.push({'name': person, 'credit': group[person].credit})
-    }
-    let payers = people.filter( a => a.credit < 0).sort( (a,b) => a.credit - b.credit);
-    let receivers  = people.filter( a => a.credit > 0).sort( (a,b) => b.credit - a.credit);
-    if ( payers.length < 1  || receivers.length < 1) return []
-
-    let repayments = []
-    do {
-        let payer = payers[0];
-        let receiver = receivers[0]
-        let diff = +receiver.credit + +payer.credit
-        if (diff < 0) {
-            payer.credit =  m(payer.credit + receiver.credit);
-            repayments.push( [payer.name, receiver.name, m(receiver.credit)] )
-            receivers.shift()
-        } else if (diff > 0) {
-            receiver.credit = m(receiver.credit + payer.credit);
-            repayments.push( [payer.name, receiver.name, m(-payer.credit)] )
-            payers.shift()
-        } else {
-            repayments.push( [payer.name, receiver.name, m(receiver.credit)] )
-            receivers.shift()
-            payers.shift()
-        }
-    } while (payers.length > 0 && receivers.length > 0)
-    return repayments
 }
 
 
@@ -287,7 +288,7 @@ function repaymentsToDOM() {
     let div = document.querySelector('#repayments')
     div.innerHTML = ''
 
-    let repayments = calculateRepayments(group)
+    let repayments = group.calculateRepayments()
     if (repayments.length < 1) div.innerHTML = 'No repayments required'
     for (let repayment of repayments) {
         let p = document.createElement('p')
