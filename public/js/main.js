@@ -149,19 +149,49 @@ class Person {
 
 
 // DOM functions
+function setAttributes(el, attrs) {
+    Object.keys(attrs).forEach(key => el.setAttribute(key, attrs[key]));
+}
+
+
+function createAccordionItem(name, accordionParent) {
+    let accordionItem = document.createElement('div')
+    setAttributes(accordionItem, {'class': 'person accordion-item', 'id': `accordion-item-${name}`})
+    let accordionHeader = document.createElement('h2')
+    setAttributes(accordionHeader, {'class': 'accordion-header'})
+
+    let accordionBtn = document.createElement('button')
+    setAttributes(accordionBtn, {
+        'type': 'button',
+        'class': 'accordion-button',
+        'data-bs-toggle': 'collapse',
+        'data-bs-target': `#accordion-collapse-${name}`,
+        'aria-expanded': 'true',
+        'aria-controls': `accordion-collapse-${name}`,
+    })
+    accordionBtn.innerText = name
+
+    let accordionCollapse = document.createElement('div')
+    setAttributes(accordionCollapse, {'class': 'accordion-collapse collapse show', 'aria-labelledby': 'accordion-collapse', 'id': `accordion-collapse-${name}`})
+
+    let accordionBody = document.createElement('div')
+    setAttributes(accordionBody, {'class': 'accordion-body'})
+
+    accordionParent.appendChild(accordionItem)
+    accordionItem.appendChild(accordionHeader)
+    accordionHeader.appendChild(accordionBtn)
+    accordionItem.appendChild(accordionCollapse)
+    accordionCollapse.appendChild(accordionBody)
+
+    return [accordionItem, accordionHeader, accordionBtn, accordionCollapse, accordionBody]
+}
+
+
 function peopleToDOM() {
     people = document.querySelector('#people')
     people.innerHTML = ''
-    // Create a div containing the name and split of each person in the group
     for (let name in group) {
-        let div = document.createElement('div')
-        div.classList.add('person')
-        let detailsDiv = document.createElement('div')
-        detailsDiv.classList.add('details')
-
-        let expandBtn = document.createElement('button')
-        expandBtn.innerText = 'Expand'
-        expandBtn.addEventListener('click', function() { expandPersonDetails(detailsDiv, name) })
+        let accordionBody = createAccordionItem(name, people)[4]
 
         let nameField = document.createElement('input')
         nameField.setAttribute('value', name)
@@ -170,6 +200,9 @@ function peopleToDOM() {
         splitField.setAttribute('value', group[name].split)
 
         let updateBtn = document.createElement('button')
+        setAttributes(updateBtn, {
+            'class': 'btn btn-outline-primary',
+        })
         updateBtn.innerText = 'Update'
         updateBtn.addEventListener( 'click', function() {
             group.updatePerson(name, nameField.value, splitField.value)
@@ -177,19 +210,21 @@ function peopleToDOM() {
         } )
 
         let deleteBtn = document.createElement('button')
+        setAttributes(deleteBtn, {
+            'class': 'btn btn-outline-secondary',
+        })
+
         deleteBtn.innerText = 'Delete'
         deleteBtn.addEventListener( 'click', function() {
             group.deletePerson(name)
             location.reload()
         } )
 
-        people.appendChild(div)
-        div.appendChild(expandBtn)
-        div.appendChild(nameField)
-        div.appendChild(splitField)
-        div.appendChild(updateBtn)
-        div.appendChild(deleteBtn)
-        div.appendChild(detailsDiv)
+        accordionBody.appendChild(nameField)
+        accordionBody.appendChild(splitField)
+        accordionBody.appendChild(updateBtn)
+        accordionBody.appendChild(deleteBtn)
+        expandPersonDetails(accordionBody, name)
     }
 }
 
@@ -238,48 +273,43 @@ function personTransactionsToDOM(parent, name) {
 }
 
 function expandPersonDetails(parent, name) {
-    if (parent.classList.contains('expanded')) {
-        parent.innerHTML = ''
-        parent.classList.remove('expanded')
-    } else {
-        let div = document.createElement('div')
-        let transactionsDiv = document.createElement('div')
-        transactionsDiv.classList.add('transactions')
+    let div = document.createElement('div')
+    let transactionsDiv = document.createElement('div')
+    transactionsDiv.classList.add('transactions')
 
-        let cost = document.createElement('input')
-        cost.setAttribute('placeholder', 'Cost')
+    let cost = document.createElement('input')
+    cost.setAttribute('placeholder', 'Cost')
 
-        let category = document.createElement('input')
-        category.setAttribute('placeholder', 'Category')
+    let category = document.createElement('input')
+    category.setAttribute('placeholder', 'Category')
 
-        let description = document.createElement('input')
-        description.setAttribute('placeholder', 'Description')
+    let description = document.createElement('input')
+    description.setAttribute('placeholder', 'Description')
 
-        let date = document.createElement('input')
-        date.setAttribute('type', 'date')
+    let date = document.createElement('input')
+    date.setAttribute('type', 'date')
+    date.value = new Date().toISOString().slice(0,10)
+
+    let submitBtn = document.createElement('button')
+    submitBtn.innerText = 'Submit Transaction'
+    submitBtn.addEventListener('click', function() {
+        group[name].addTransaction(cost.value, category.value, description.value, date.value)
+        cost.value = ''
+        category.value = ''
+        description.value = ''
         date.value = new Date().toISOString().slice(0,10)
-
-        let submitBtn = document.createElement('button')
-        submitBtn.innerText = 'Submit Transaction'
-        submitBtn.addEventListener('click', function() {
-            group[name].addTransaction(cost.value, category.value, description.value, date.value)
-            cost.value = ''
-            category.value = ''
-            description.value = ''
-            date.value = new Date().toISOString().slice(0,10)
-            personTransactionsToDOM(transactionsDiv, name)
-        })
-
-        parent.appendChild(div)
-        parent.classList.add('expanded')
-        div.appendChild(cost)
-        div.appendChild(category)
-        div.appendChild(description)
-        div.appendChild(date)
-        div.appendChild(submitBtn)
-        div.appendChild(transactionsDiv)
         personTransactionsToDOM(transactionsDiv, name)
-    }
+    })
+
+    parent.appendChild(div)
+    parent.classList.add('expanded')
+    div.appendChild(cost)
+    div.appendChild(category)
+    div.appendChild(description)
+    div.appendChild(date)
+    div.appendChild(submitBtn)
+    div.appendChild(transactionsDiv)
+    personTransactionsToDOM(transactionsDiv, name)
 }
 
 function addPersonfromDOM() {
