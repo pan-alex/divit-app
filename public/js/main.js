@@ -187,129 +187,148 @@ function createAccordionItem(name, accordionParent) {
 }
 
 
-function peopleToDOM() {
-    people = document.querySelector('#people')
-    people.innerHTML = ''
-    for (let name in group) {
-        let accordionBody = createAccordionItem(name, people)[4]
+function CompEditMember(parentElement, name) {
 
-        let nameField = document.createElement('input')
-        nameField.setAttribute('value', name)
+    // Adds fields for editting a person's name / split
+    let nameDiv = document.createElement('div')
+    setAttributes(nameDiv, {'class': 'container-lg editPerson'})
 
-        let splitField = document.createElement('input')
-        splitField.setAttribute('value', group[name].split)
+    let nameField = document.createElement('input')
+    setAttributes(nameField, {'value': name, 'class': 'form-control', 'type': 'text', 'placeholder': 'Name'})
 
-        let updateBtn = document.createElement('button')
-        setAttributes(updateBtn, {
-            'class': 'btn btn-outline-primary',
-        })
-        updateBtn.innerText = 'Update'
-        updateBtn.addEventListener( 'click', function() {
-            group.updatePerson(name, nameField.value, splitField.value)
-            location.reload()
-        } )
+    let splitField = document.createElement('input')
+    setAttributes(splitField, {'value': group[name].split, 'class': 'form-control', 'type': 'text', 'placeholder': 'Percent'})
 
-        let deleteBtn = document.createElement('button')
-        setAttributes(deleteBtn, {
-            'class': 'btn btn-outline-secondary',
-        })
+    let updateBtn = document.createElement('button')
+    setAttributes(updateBtn, {'class': 'btn btn-outline-primary'})
+    updateBtn.innerText = 'Update'
+    updateBtn.addEventListener( 'click', function() {
+        group.updatePerson(name, nameField.value, splitField.value)
+        location.reload()
+    } )
 
-        deleteBtn.innerText = 'Delete'
-        deleteBtn.addEventListener( 'click', function() {
-            group.deletePerson(name)
-            location.reload()
-        } )
+    let deleteBtn = document.createElement('button')
+    setAttributes(deleteBtn, {
+        'class': 'btn btn-outline-secondary col',
+    })
 
-        accordionBody.appendChild(nameField)
-        accordionBody.appendChild(splitField)
-        accordionBody.appendChild(updateBtn)
-        accordionBody.appendChild(deleteBtn)
-        expandPersonDetails(accordionBody, name)
-    }
+    deleteBtn.innerText = 'Delete'
+    deleteBtn.addEventListener( 'click', function() {
+        group.deletePerson(name)
+        location.reload()
+    } )
+
+    parentElement.appendChild(nameDiv)
+    nameDiv.append(nameField)
+    nameDiv.append(splitField)
+    nameDiv.append(updateBtn)
+    nameDiv.append(deleteBtn)
 }
 
-function personTransactionsToDOM(parent, name) {
-    parent.innerHTML = ''
-    let transactions = group[name].transactions //.sort( (a,b) => b.date >= a.date)
-
-    for (let t in transactions) {
-        let div = document.createElement('div')
-        div.classList.add('transaction')
-
-        let cost = document.createElement('input')
-        cost.setAttribute('value', transactions[t].cost)
-
-        let category = document.createElement('input')
-        category.setAttribute('value', transactions[t].category)
-
-        let description = document.createElement('input')
-        description.setAttribute('value', transactions[t].description)
-
-        let date = document.createElement('input')
-        date.setAttribute('type', 'date')
-        date.setAttribute('value', transactions[t].date)
-
-        let updateBtn = document.createElement('button')
-        updateBtn.innerText = 'Update'
-        updateBtn.addEventListener( 'click', function() {
-            group[name].updateTransaction(t, cost.value, category.value, description.value, date.value)
-        } )
-
-        let deleteBtn = document.createElement('button')
-        deleteBtn.innerText = 'Delete'
-        deleteBtn.addEventListener( 'click', function() {
-            group[name].deleteTransaction(t)
-            personTransactionsToDOM(parent, name)
-        } )
-
-        parent.append(div)
-        div.appendChild(date)
-        div.appendChild(cost)
-        div.appendChild(category)
-        div.appendChild(description)
-        div.appendChild(updateBtn)
-        div.appendChild(deleteBtn)
-    }
-}
-
-function expandPersonDetails(parent, name) {
-    let div = document.createElement('div')
-    let transactionsDiv = document.createElement('div')
-    transactionsDiv.classList.add('transactions')
-
-    let cost = document.createElement('input')
-    cost.setAttribute('placeholder', 'Cost')
-
-    let category = document.createElement('input')
-    category.setAttribute('placeholder', 'Category')
-
-    let description = document.createElement('input')
-    description.setAttribute('placeholder', 'Description')
+function CompNewTransaction(parentElement, transactionsListingElement, name) {
+    let newTransactionsDiv = document.createElement('div')
+    setAttributes(newTransactionsDiv, {'class': 'newTransaction container-lg'})
 
     let date = document.createElement('input')
-    date.setAttribute('type', 'date')
-    date.value = new Date().toISOString().slice(0,10)
+    setAttributes(date, {'class': 'form-control', 'type': 'date', 'value': `${new Date().toISOString().slice(0,10)}` })
+
+    let cost = document.createElement('input')
+    setAttributes(cost, {'class': 'form-control', 'type': 'number', 'placeholder': 'Cost'})
+
+    let category = document.createElement('input')
+    setAttributes(category, {'class': 'form-control', 'type': 'text', 'placeholder': 'Category'})
+
+    let description = document.createElement('input')
+    setAttributes(description, {'class': 'form-control description', 'type': 'text', 'placeholder': 'Description'})
 
     let submitBtn = document.createElement('button')
-    submitBtn.innerText = 'Submit Transaction'
+    setAttributes(submitBtn, {'class': 'btn btn-primary'})
+    submitBtn.innerText = 'Add'
+
     submitBtn.addEventListener('click', function() {
         group[name].addTransaction(cost.value, category.value, description.value, date.value)
         cost.value = ''
         category.value = ''
         description.value = ''
         date.value = new Date().toISOString().slice(0,10)
-        personTransactionsToDOM(transactionsDiv, name)
+        CompTransactionsListing(transactionsListingElement, name)
     })
 
-    parent.appendChild(div)
-    parent.classList.add('expanded')
-    div.appendChild(cost)
-    div.appendChild(category)
-    div.appendChild(description)
-    div.appendChild(date)
-    div.appendChild(submitBtn)
-    div.appendChild(transactionsDiv)
-    personTransactionsToDOM(transactionsDiv, name)
+    newTransactionsDiv.appendChild(date)
+    newTransactionsDiv.appendChild(cost)
+    newTransactionsDiv.appendChild(category)
+    newTransactionsDiv.appendChild(description)
+    newTransactionsDiv.appendChild(submitBtn)
+    parentElement.appendChild(newTransactionsDiv)
+}
+
+
+function CompTransactionsListing(parentElement, name) {
+    parentElement.innerHTML = ''
+    let transactions = group[name].transactions
+
+    for (let t in transactions) {
+        let transactionsDiv = document.createElement('div')
+        transactionsDiv.classList.add('transaction')
+
+        let cost = document.createElement('input')
+        setAttributes(cost, {'class': 'form-control', 'type': 'number', 'placeholder': 'Cost', 'value': transactions[t].cost})
+
+        let category = document.createElement('input')
+        setAttributes(category, {'class': 'form-control', 'type': 'text', 'placeholder': 'Category', 'value': transactions[t].category})
+
+        let description = document.createElement('input')
+        setAttributes(description, {'class': 'form-control description', 'type': 'text', 'placeholder': 'Description', 'value': transactions[t].description})
+
+        let date = document.createElement('input')
+        setAttributes(date, {'class': 'form-control', 'type': 'date', 'value': transactions[t].date})
+
+        let updateBtn = document.createElement('button')
+        setAttributes(updateBtn, {'class': 'btn btn-outline-primary'})
+        updateBtn.innerText = 'Update'
+        updateBtn.addEventListener( 'click', function() {
+            group[name].updateTransaction(t, cost.value, category.value, description.value, date.value)
+        } )
+
+        let deleteBtn = document.createElement('button')
+        setAttributes(deleteBtn, {'class': 'btn btn-outline-secondary'})
+        deleteBtn.innerText = 'Delete'
+        deleteBtn.addEventListener( 'click', function() {
+            group[name].deleteTransaction(t)
+            CompTransactionsListing(parentElement, name)
+        } )
+
+        parentElement.append(transactionsDiv)
+        transactionsDiv.appendChild(date)
+        transactionsDiv.appendChild(cost)
+        transactionsDiv.appendChild(category)
+        transactionsDiv.appendChild(description)
+        transactionsDiv.appendChild(updateBtn)
+        transactionsDiv.appendChild(deleteBtn)
+    }
+}
+
+function CompTransactionInfo(parentElement, name) {
+    let div = document.createElement('div')
+    setAttributes(div, {'class': 'transactionInfo'})
+    parentElement.appendChild(div)
+
+    let transactionsListingDiv = document.createElement('div')
+    setAttributes(transactionsListingDiv, {'class': 'transactionsListing container-lg'})
+    div.appendChild(transactionsListingDiv)
+
+    CompNewTransaction(div, transactionsListingDiv, name)
+    CompTransactionsListing(transactionsListingDiv, name)
+}
+
+function memberInfoToDOM() {
+    people = document.querySelector('#people')
+    people.innerHTML = ''
+    for (let name in group) {
+        let accordionBody = createAccordionItem(name, people)[4]
+        CompEditMember(accordionBody, name)
+        CompTransactionInfo(accordionBody, name)
+    }
 }
 
 function addPersonfromDOM() {
@@ -337,7 +356,7 @@ function repaymentsToDOM() {
 
 // On load
 group = Group.prototype.fromLocalStorage()
-peopleToDOM()
+memberInfoToDOM()
 
 createPersonBtn.addEventListener('click', addPersonfromDOM)
 repaymentsBtn.addEventListener('click', repaymentsToDOM)

@@ -1,22 +1,87 @@
-/* html {
-    box-sizing: border-box;
-    font-size: 100%;
-}
-
-  *, *:before, *:after {
-    box-sizing: inherit;
-}
-
-
-section {
-    margin-top: 3rem;
-}
-
-#peopleHeaders {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.person {
-    margin-bottom: 3rem;
+/* button {
+    min-width: 6rem;
 } */
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+
+/* EditPerson component */
+.editPerson {
+    display: flex;
+    margin-bottom: 5rem;
+}
+
+.editPerson > input {
+    flex-basis: 40%;
+}
+
+.editPerson > button {
+    flex-basis: 20%;
+}
+
+/* New newTransaction component */
+
+.newTransaction > * {
+    margin-top: 0.5rem;
+}
+
+.newTransaction > button {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .newTransaction {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .newTransaction > * {
+        flex-basis: 15%;
+    }
+
+    .newTransaction .description {
+        flex-basis: 40%;
+    }
+}
+
+
+/* newTransactions Listing component */
+
+.transactionsListing {
+    margin-top: 4rem;
+}
+
+.transaction > * {
+    margin-top: 0.5rem;
+}
+
+.transaction > button {
+    width: 50%;
+}
+
+@media (min-width: 0px) {
+    .transaction {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .transaction > input {
+        flex-basis: 15%;
+    }
+
+    .transaction > button {
+        flex-basis: 10%;
+    }
+
+    .transaction .description {
+        flex-basis: 24%;
+    }
+}
