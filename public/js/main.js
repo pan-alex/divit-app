@@ -177,7 +177,8 @@ function CompAccordionItem(name, accordionParent) {
     let accordionBody = document.createElement('div')
     setAttributes(accordionBody, {'class': 'accordion-body'})
 
-    accordionParent.appendChild(accordionItem)
+    // accordionParent.appendChild(accordionItem)
+    accordionParent.insertBefore(accordionItem, accordionParent.childNodes[0])
     accordionItem.appendChild(accordionHeader)
     accordionHeader.appendChild(accordionBtn)
     accordionItem.appendChild(accordionCollapse)
@@ -323,7 +324,7 @@ function CompTransactionInfo(parentElement, name) {
 
 function memberInfoToDOM() {
     people = document.querySelector('#people')
-    people.innerHTML = ''
+    // people.innerHTML = ''
     for (let name in group) {
         let accordionBody = CompAccordionItem(name, people)[4]
         CompEditMember(accordionBody, name)

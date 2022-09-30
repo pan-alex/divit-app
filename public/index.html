@@ -19,23 +19,40 @@
                 <span>Percent</span>
             </div>
             <div id="people" class="accordion">
+                <div id="accordion-item-new-person" class="accordion-item">
+                    <div class="accordion-header">
+                        <button type="button" class="accordion-button" data-bs-toggle="collapse"  data-bs-target="#accordion-collapse-new-person" aria-expanded="true" aria-controls="accordion-collapse-new-person">
+                            Create New
+                        </button>
+                    </div>
+                    <div id="accordion-collapse-new-person" class="accordion-collapse collapse show" aria-labelledby="accordion-collapse">
+                        <div class="accordion-body">
+                            <div class="container-lg">
+                                <div class="editPerson">
+                                    <!-- <div> -->
+                                        <input type="text" id="personName" name="personName" placeholder="Name" class="form-control">
+                                        <label for="personName"></label>
+                                    <!-- </div> -->
+                                    <!-- <div> -->
+                                        <input type="text" id="personSplit" name="personSplit" placeholder="Percent" class="form-control">
+                                        <label for="personSplit"></label>
+                                    <!-- </div> -->
+                                        <button id="createPersonBtn" class="btn btn-primary">
+                                            Create
+                                        </button>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
             </div>
         </section>
 
         <!-- Buttons to create new people -->
         <section>
-            <h2>Create a new Person</h2>
-            <div>
-                <div>
-                    <input type="text" id="personName" name="personName" placeholder="name" class="form-control">
-                    <label for="personName">Name</label>
-                </div>
-                <div>
-                    <input type="text" id="personSplit" name="personSplit" placeholder="percent" class="form-control">
-                    <label for="personSplit">Percent</label>
-                </div>
-                    <button id="createPersonBtn" class="btn btn-primary">Create Person</button>
-            </div>
+            <!-- <h2>Create a new Person</h2>
+            <div class="container">
+
+            </div> -->
             <button id="resetGroupBtn">Reset</button>
         </section>
         <section>
