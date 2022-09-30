@@ -154,7 +154,7 @@ function setAttributes(el, attrs) {
 }
 
 
-function createAccordionItem(name, accordionParent) {
+function CompAccordionItem(name, accordionParent) {
     let accordionItem = document.createElement('div')
     setAttributes(accordionItem, {'class': 'person accordion-item', 'id': `accordion-item-${name}`})
     let accordionHeader = document.createElement('h2')
@@ -325,7 +325,7 @@ function memberInfoToDOM() {
     people = document.querySelector('#people')
     people.innerHTML = ''
     for (let name in group) {
-        let accordionBody = createAccordionItem(name, people)[4]
+        let accordionBody = CompAccordionItem(name, people)[4]
         CompEditMember(accordionBody, name)
         CompTransactionInfo(accordionBody, name)
     }
