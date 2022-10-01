@@ -1,0 +1,15 @@
+|- App
+    |- Members info
+        |- Edit member info
+         \ Transactions info
+            |- New Transaction
+             \ Transaction List
+                |- Edit Transaction info
+
+    |- Add new member
+         \ Edit member info
+
+    |- Repayments
+        |- Repayments List
+
+    |- Reset

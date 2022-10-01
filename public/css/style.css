@@ -1,3 +1,7 @@
+html {
+    font-size: 100%;
+}
+
 /* button {
     min-width: 6rem;
 } */
@@ -83,5 +87,25 @@ input[type=number] {
 
     .transaction .description {
         flex-basis: 24%;
+    }
+}
+
+
+.flex-form > button {
+    min-height: calc(3.5rem + 2px);
+}
+
+@media (min-width: 568px) {
+    .flex-form {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .flex-form > div {
+        flex: 1 1 200px;
+    }
+
+    .flex-form > button {
+        min-width: 5rem;
     }
 }

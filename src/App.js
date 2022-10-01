@@ -1,23 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import {Group, group} from './Components/Classes';
+// import MembersInfo from './Components/MembersInfo';
+import MemberNew from './Components/MemberNew';
+import MembersInfo from './Components/MembersInfo';
 
 function App() {
+  console.log('Starting App')
+  console.log(group)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MembersInfo />
     </div>
   );
 }
