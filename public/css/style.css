@@ -2,6 +2,17 @@ html {
     font-size: 100%;
 }
 
+.no-mobile {
+    display: none;
+}
+
+@media (min-width: 568px) {
+    .no-mobile {
+        display: block;
+    }
+}
+
+
 /* button {
     min-width: 6rem;
 } */
@@ -113,6 +124,7 @@ input[type=number] {
 .flex-column {
     display: flex;
     flex-direction: column;
+    padding-inline: 1rem;
 }
 
 
@@ -125,7 +137,3 @@ input[type=number] {
 .accordion-button > div {
     flex: 1 1 200px;
 }
-
-/* .accordion-button strong {
-    text-align: right;
-} */

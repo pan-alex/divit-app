@@ -8,7 +8,7 @@ export default function MemberInfo( {member} ) {
             <h2 className="accordion-header" aria-label={member.name}>
                 <button
                     type="button"
-                    className="accordion-button collapsed flex-form"
+                    className="accordion-button collapsed"
                     data-bs-toggle="collapse"
                     data-bs-target={"#accordion-collapse" + member.name}
                     aria-expanded="true"
@@ -17,7 +17,7 @@ export default function MemberInfo( {member} ) {
                         <div>
                             <h3>{member.name}</h3>
                         </div>
-                        <div>
+                        <div className="no-mobile">
                             <div className="flex-column">
                                 <span>Contribution</span>
                                 <strong className="h3">${member.contribution}</strong>
