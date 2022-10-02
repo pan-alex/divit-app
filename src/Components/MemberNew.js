@@ -14,9 +14,9 @@ export default function MemberNew( {groupState, setState}) {
     return (
         <section>
             <h2>Create a new Person</h2>
-            <form className="container-lg flex-form">
+            <div className="container-lg flex-form">
                 <div  className='form-floating'>
-                    <input type="text" id="memberName" className="form-control " name="memberName" placeholder="name" />
+                    <input type="text" id="memberName" className="form-control" name="memberName" placeholder="name" />
                     <label htmlFor="memberName">Name</label>
                 </div>
                 <div className='form-floating'>
@@ -26,7 +26,7 @@ export default function MemberNew( {groupState, setState}) {
                 <button id="btnMemberNew" className="btn btn-primary" onClick={handleClick}>
                     Add Member
                     </button>
-            </form>
+            </div>
         </section>
     )
 }

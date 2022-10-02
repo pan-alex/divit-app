@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 function m(n) {
     // Converts numbers to "money" by changing them to numbers with 2 decimal places.
     // Longer term use actual currency data types.
@@ -15,30 +13,38 @@ function m(n) {
 
 
 export default class Group {
+    constructor() {
+        this.nTransactions = 0;
+        this.members = {};
+    }
     addPerson(name, split) {
-        if (name && !this[name]) {
-            this[name] = {'name': name, 'split': split || 0, 'contribution': 0, 'transactions': []}
-        } else {
-            alert('Enter a name that is not already in use.')
+        console.log(name)
+        if (!name) {
+            alert('Enter a name')
         }
-        this.toLocalStorage()
-        return 'hi'
+        let pattern = RegExp(name)
+        if (Object.keys(this.members).find(key => key.match(pattern))) {
+            alert(`The name ${name} is already in use.`)
+        }
+        this.members[name] = {'name': name, 'split': split || 1, 'contribution': 0, 'transactions': []}
+        console.log(this.members[name])
+        return this.toLocalStorage()
     }
 
     deletePerson(name) {
-        delete this[name]
+        delete this.members[name]
         return this.toLocalStorage()
     }
 
     updatePerson(name, newName, newSplit) {
         if (newSplit) {
-            this[name].split = newSplit
+            this.members[name].split = newSplit
         }
         if (newName && name !== newName) {
-            if (!this[newName]) {
-                this[newName] = this[name]
-                this[newName].name = newName
-                delete this[name]
+            if (!this.members[newName]) {
+                this.members[newName] = this.members[name]
+                this.members[newName].name = newName
+                delete this.members[name]
             } else {
                 alert('That name is already being used.')
             }
@@ -48,8 +54,8 @@ export default class Group {
 
     objToGroup(obj) {
         obj = Object.assign(new Group(), obj)
-        // for (let person in obj) {
-        //     obj[person] = Object.assign(new Person(), obj[person])
+        // for (let member in obj) {
+        //     obj[member] = Object.assign(new Person(), obj[member])
         // }
         return obj
     }
@@ -67,25 +73,25 @@ export default class Group {
     // Returns:
     // this: Modifies the input object to add the following property:
         // credit: Number. The amount receiver to the this, based on their contribution minus what they are responsible for (sum * split). The sum of credit for all perople is 0.
-        let sum = Object.values(this).reduce( (sum, person) => sum + person.contribution, 0);
-        let splitSum = Object.values(this).reduce( (splitSum, person) => splitSum + +person.split, 0);
-        for (let person in this) {
-            this[person].credit = m(this[person].contribution - sum * this[person].split/splitSum)
+        let sum = Object.values(this.members).reduce( (sum, member) => sum + member.contribution, 0);
+        let splitSum = Object.values(this.members).reduce( (splitSum, member) => splitSum + +member.split, 0)
+        for (let member in this.members) {
+            this.members[member].credit = m(this.members[member].contribution - sum * this.members[member].split/splitSum)
         }
         return this.toLocalStorage()
      }
 
     calculateRepayments() {
     // Returns:
-        // repayments: Array representing the repayments each person should make so that no one owes anyone money. Each element is a subarray representing one payment. It has the format [P, R, Amt] where P = payer, R = receiver, Amt = amount to pay.
-        // A greedy approach is utilized where the person with the least credit pays the person with the most credit until all debts are paid.
+        // repayments: Array representing the repayments each member should make so that no one owes anyone money. Each element is a subarray representing one payment. It has the format [P, R, Amt] where P = payer, R = receiver, Amt = amount to pay.
+        // A greedy approach is utilized where the member with the least credit pays the member with the most credit until all debts are paid.
         this.calculateShare()
-        let people = []
-        for (let person in this) {
-            people.push({'name': person, 'credit': this[person].credit})
+        let members = []
+        for (let member in this.members) {
+            members.push({'name': member, 'credit': this.members[member].credit})
         }
-        let payers = people.filter( a => a.credit < 0).sort( (a,b) => a.credit - b.credit);
-        let receivers  = people.filter( a => a.credit > 0).sort( (a,b) => b.credit - a.credit);
+        let payers = members.filter( a => a.credit < 0).sort( (a,b) => a.credit - b.credit);
+        let receivers  = members.filter( a => a.credit > 0).sort( (a,b) => b.credit - a.credit);
         if ( payers.length < 1  || receivers.length < 1) return []
 
         let repayments = []
@@ -112,7 +118,9 @@ export default class Group {
 
     addTransaction(cost, category, description, date) {
         cost = m(cost)
+        this.nTransactions += 1
         this.transactions.push({
+            id: this.nTransactions,
             cost:cost,
             category: category,
             description: description,

@@ -6,16 +6,16 @@ import { useState } from 'react'
 
 export default function MembersInfo() {
     group.calculateShare()
-    const [groupState, setGroup] = useState(group)
+    const [members, setMembers] = useState(group.members)
 
-    let members = Object.values(groupState)
-    let items = members.map(member => <MemberInfo member={member} key={member.name}/>)
+    let membersList = Object.values(members)
+    let items = membersList.map(member => <MemberInfo member={member} key={member.name}/>)
     return (
         <>
             <div className="accordion">
                 {items}
             </div>
-            <MemberNew groupState={groupState} setState={setGroup}/>
+            <MemberNew groupState={members} setState={setMembers}/>
         </>
     )
 }

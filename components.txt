@@ -6,8 +6,7 @@
              \ Transaction List
                 |- Edit Transaction info
 
-    |- Add new member
-         \ Edit member info
+        |- Add new member
 
     |- Repayments
         |- Repayments List
