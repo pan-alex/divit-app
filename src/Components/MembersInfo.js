@@ -5,6 +5,7 @@ import MemberNew from './MemberNew'
 import { useState } from 'react'
 
 export default function MembersInfo() {
+    group.calculateShare()
     const [groupState, setGroup] = useState(group)
 
     let members = Object.values(groupState)

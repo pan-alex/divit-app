@@ -109,3 +109,23 @@ input[type=number] {
         min-width: 5rem;
     }
 }
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.accordion-button {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.accordion-button > div {
+    flex: 1 1 200px;
+}
+
+/* .accordion-button strong {
+    text-align: right;
+} */
