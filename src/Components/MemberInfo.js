@@ -5,20 +5,8 @@ import TransactionNew from "./TransactionNew";
 import TransactionsList from "./TransactionsList";
 import { useState } from 'react'
 
-export default function MemberInfo( {member} ) {
-
-    const [ , setMember] = useState(member)
-
-    function addTransaction() {
-        let amount = document.querySelector(`#new-amount-${member.name}`).value
-        let category = document.querySelector(`#new-category-${member.name}`).value
-        let description = document.querySelector(`#new-description-${member.name}`).value
-        let date = document.querySelector(`#new-date-${member.name}`).value
-        group.addTransaction(member, amount, category, description, date)
-        setMember(prev => {
-            return {...prev}
-        })
-    }
+// eslint-disable-next-line
+export default function MemberInfo( {member, newTransaction} ) {
 
     return (
         <div id={'accordion-item-' + member.name} className="member accordion-item">
@@ -54,7 +42,7 @@ export default function MemberInfo( {member} ) {
                 aria-labelledby='accordion-collapse'
                 >
                     <div className='accordion-body'>
-                        <TransactionNew member={member} handleClick={addTransaction}/>
+                        <TransactionNew member={member} newTransaction={newTransaction}/>
                         <TransactionsList member={member} />
                     </div>
             </div>

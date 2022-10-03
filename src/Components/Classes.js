@@ -122,7 +122,6 @@ export default class Group {
             description: description,
             date: date
         })
-        console.log(member.transactions)
         member.contribution = m(member.contribution + cost)
         this.calculateShare()
         return this.toLocalStorage()
