@@ -17,8 +17,7 @@ export default class Group {
         this.nTransactions = 0;
         this.members = {};
     }
-    addPerson(name, split) {
-        console.log(name)
+    addMember(name, split) {
         if (!name) {
             alert('Enter a name')
         }
@@ -31,12 +30,12 @@ export default class Group {
         return this.toLocalStorage()
     }
 
-    deletePerson(name) {
+    deleteMember(name) {
         delete this.members[name]
         return this.toLocalStorage()
     }
 
-    updatePerson(name, newName, newSplit) {
+    updateMember(name, newName, newSplit) {
         if (newSplit) {
             this.members[name].split = newSplit
         }
@@ -54,9 +53,6 @@ export default class Group {
 
     objToGroup(obj) {
         obj = Object.assign(new Group(), obj)
-        // for (let member in obj) {
-        //     obj[member] = Object.assign(new Person(), obj[member])
-        // }
         return obj
     }
 
@@ -116,35 +112,39 @@ export default class Group {
         return repayments
     }
 
-    addTransaction(cost, category, description, date) {
+    addTransaction(member, cost, category, description, date) {
         cost = m(cost)
         this.nTransactions += 1
-        this.transactions.push({
+        member.transactions.push({
             id: this.nTransactions,
             cost:cost,
             category: category,
             description: description,
             date: date
         })
-        this.contribution = m(this.contribution + cost)
+        console.log(member.transactions)
+        member.contribution = m(member.contribution + cost)
+        this.calculateShare()
         return this.toLocalStorage()
     }
 
-    updateTransaction(index, cost, category, description, date) {
+    updateTransaction(member, index, cost, category, description, date) {
         cost = m(cost)
-        this.contribution = m(this.contribution + cost - this.transactions[index].cost)
-        this.transactions[index] = {
+        member.contribution = m(member.contribution + cost - member.transactions[index].cost)
+        member.transactions[index] = {
             cost:cost,
             category: category,
             description: description,
             date: date
         }
+        this.calculateShare()
         return this.toLocalStorage()
     }
 
-    deleteTransaction(index) {
-        this.contribution = m(this.contribution - this.transactions[index].cost)
+    deleteTransaction(member, index) {
+        this.contribution = m(member.contribution - member.transactions[index].cost)
         this.transactions.splice(index, 1)
+        this.calculateShare()
         return this.toLocalStorage()
     }
 }

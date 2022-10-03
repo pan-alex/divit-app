@@ -1,4 +1,5 @@
 // Component containing an accordion with all members' info
+// Controls state for group.members
 import { group } from './Classes'
 import MemberInfo from './MemberInfo'
 import MemberNew from './MemberNew'
@@ -6,16 +7,23 @@ import { useState } from 'react'
 
 export default function MembersInfo() {
     group.calculateShare()
-    const [members, setMembers] = useState(group.members)
+    const [membersState, setMembers] = useState(group.members)
 
-    let membersList = Object.values(members)
-    let items = membersList.map(member => <MemberInfo member={member} key={member.name}/>)
+    function addMember() {
+        let name = document.querySelector('#memberName').value
+        let split = document.querySelector('#memberSplit').value
+        group.addMember(name, split)
+        setMembers(prev => {
+            return {...prev}
+        })
+    }
+
     return (
         <>
             <div className="accordion">
-                {items}
+                { Object.values(membersState).map(member => <MemberInfo member={member} key={member.name}/>) }
             </div>
-            <MemberNew groupState={members} setState={setMembers}/>
+            <MemberNew handleClick={addMember} />
         </>
     )
 }

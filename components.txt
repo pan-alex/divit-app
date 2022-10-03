@@ -1,11 +1,12 @@
 |- App
     |- Members info
-        |- Edit member info
-         \ Transactions info
-            |- New Transaction
-             \ Transaction List
-                |- Edit Transaction info
-
+        |- Member info
+            |- Edit member info
+             \ Transactions
+                |- New Transaction
+                \ Transaction List
+                    |- Transaction
+                    |- Edit Transaction info
         |- Add new member
 
     |- Repayments

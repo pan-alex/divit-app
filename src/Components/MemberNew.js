@@ -1,16 +1,7 @@
 // Menu with fields to create a new member
 import { group } from './Classes'
 
-export default function MemberNew( {groupState, setState}) {
-    function handleClick() {
-        let name = document.querySelector('#memberName').value
-        let split = document.querySelector('#memberSplit').value
-        group.addPerson(name, split)
-        setState(prev => {
-            return {...prev}
-        })
-    }
-
+export default function MemberNew( {handleClick}) {
     return (
         <section>
             <h2>Create a new Person</h2>
