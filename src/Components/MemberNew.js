@@ -1,7 +1,7 @@
 // Menu with fields to create a new member
 import { group } from './Classes'
 
-export default function MemberNew( {handleClick}) {
+export default function MemberNew( {handleNewMember}) {
     return (
         <section>
             <h2>Create a new Person</h2>
@@ -14,7 +14,7 @@ export default function MemberNew( {handleClick}) {
                 <input type="text" id="memberSplit" name="personSplit" placeholder="percent" className="form-control" />
                     <label htmlFor="memberSplit">Percent</label>
                 </div>
-                <button id="btnMemberNew" className="btn btn-primary" onClick={handleClick}>
+                <button id="btnMemberNew" className="btn btn-primary" onClick={handleNewMember}>
                     Add Member
                     </button>
             </div>

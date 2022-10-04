@@ -1,6 +1,20 @@
 // "Form" that allows users to enter a new transaction
+import { group } from './Classes'
 
-export default function TransactionNew( {member, newTransaction} ) {
+export default function TransactionNew( {member, updateState} ) {
+
+    function handleNewTransaction(e) {
+        console.log(`member is ${member.name}`)
+        let container = e.target.parentNode
+        let amount = container.querySelector(`.amount`).value
+        let category = container.querySelector(`.category`).value
+        let description = container.querySelector(`.description`).value
+        let date = container.querySelector(`.date`).value
+        group.addTransaction(member, amount, category, description, date)
+        updateState()
+    }
+
+
     return (
         <>
             <div className={member.name + " container-lg newTransaction"}>
@@ -20,7 +34,7 @@ export default function TransactionNew( {member, newTransaction} ) {
                     <input type="date" id={'new-date-' + member.name} name="date" className="date form-control" defaultValue={new Date().toISOString().slice(0,10)}/>
                     <label htmlFor="memberSplit">Date</label>
                 </div>
-                <button id={'new-transaction-' + member.name} className="btn btn-primary" onClick={newTransaction}>
+                <button id={'new-transaction-' + member.name} className="btn btn-primary" onClick={handleNewTransaction}>
                     Add
                     </button>
             </div>

@@ -6,7 +6,7 @@ import TransactionsList from "./TransactionsList";
 import { useState } from 'react'
 
 // eslint-disable-next-line
-export default function MemberInfo( {member, newTransaction} ) {
+export default function MemberInfo( {member, updateState} ) {
 
     return (
         <div id={'accordion-item-' + member.name} className="member accordion-item">
@@ -42,7 +42,7 @@ export default function MemberInfo( {member, newTransaction} ) {
                 aria-labelledby='accordion-collapse'
                 >
                     <div className='accordion-body'>
-                        <TransactionNew member={member} newTransaction={newTransaction}/>
+                        <TransactionNew member={member} updateState={updateState}/>
                         <TransactionsList member={member} />
                     </div>
             </div>
