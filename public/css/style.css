@@ -2,6 +2,10 @@ html {
     font-size: 100%;
 }
 
+.hide {
+    display: none;
+}
+
 .no-mobile {
     display: none;
 }
@@ -9,6 +13,9 @@ html {
 @media (min-width: 568px) {
     .no-mobile {
         display: block;
+    }
+    td.no-mobile {
+        display: table-cell;
     }
 }
 
@@ -42,98 +49,50 @@ input[type=number] {
     flex-basis: 20%;
 }
 
-/* New newTransaction component */
 
-.newTransaction > * {
-    margin-top: 0.5rem;
-}
-
-.newTransaction > button {
-    width: 100%;
-}
-
-@media (min-width: 768px) {
-    .newTransaction {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .newTransaction > * {
-        flex-basis: 15%;
-    }
-
-    .newTransaction .description {
-        flex-basis: 40%;
-    }
-}
-
-
-/* newTransactions Listing component */
-
-.transactionsListing {
-    margin-top: 4rem;
-}
-
-.transaction > * {
-    margin-top: 0.5rem;
-}
-
-.transaction > button {
-    width: 50%;
-}
-
-@media (min-width: 0px) {
-    .transaction {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .transaction > input {
-        flex-basis: 15%;
-    }
-
-    .transaction > button {
-        flex-basis: 10%;
-    }
-
-    .transaction .description {
-        flex-basis: 24%;
-    }
-}
-
-
-.flex-form > button {
-    min-height: calc(3.5rem + 2px);
-}
-
-@media (min-width: 568px) {
-    .flex-form {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .flex-form > div {
-        flex: 1 1 200px;
-    }
-
-    .flex-form > button {
-        min-width: 5rem;
-    }
-}
-
+/* According Heading */
 .flex-column {
     display: flex;
     flex-direction: column;
     padding-inline: 1rem;
 }
 
-
 .accordion-button {
     display: flex;
     justify-content: space-between;
-
 }
 
 .accordion-button > div {
     flex: 1 1 200px;
+}
+
+
+/* Transactions Table */
+table {
+    text-align: left;
+}
+
+table .form-floating > label {
+    padding-block: 1.5rem;
+}
+
+tr > .date {
+    min-width: 15%;
+}
+
+tr > .category {
+    min-width: 25%;
+}
+
+tr > .description {
+    min-width: 45%;
+}
+
+tr > .amount {
+    min-width: 15%;
+    text-align: right;
+}
+
+table button {
+    text-align: center;
 }

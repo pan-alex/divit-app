@@ -1,7 +1,9 @@
 // Component that renders a table of all of the member's transactions
 import Transaction from "./Transaction"
+import TransactionNew from "./TransactionNew"
 
 export default function TransactionsList( {member} ) {
+    member.transactions.sort( (a, b) => new Date(b.date) - new Date(a.date) )
     let transactions = member.transactions.map(transaction => <Transaction transaction={transaction} key={transaction.id}/>)
 
     return (
@@ -9,16 +11,22 @@ export default function TransactionsList( {member} ) {
             <table className="transactionsListing container-lg table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Amount</th>
-                        <th>Category</th>
-                        <th>Description</th>
-                        <th>Date</th>
+                        <th className="date">Date</th>
+                        <th className="category">Category</th>
+                        <th className="description no-mobile">Description</th>
+                        <th className="amount">Amount</th>
                     </tr>
                 </thead>
                 <tbody>
                     {transactions}
                 </tbody>
             </table>
+            <table className='table'>
+                <tbody>
+                    <TransactionNew member={member} />
+                </tbody>
+            </table>
+
         </>
 
     )

@@ -10,6 +10,7 @@ export default function TransactionNew( {member, updateState} ) {
         let category = container.querySelector(`.category`).value
         let description = container.querySelector(`.description`).value
         let date = container.querySelector(`.date`).value
+        console.log(date)
         group.addTransaction(member, amount, category, description, date)
         updateState()
     }
@@ -17,27 +18,31 @@ export default function TransactionNew( {member, updateState} ) {
 
     return (
         <>
-            <div className={member.name + " container-lg newTransaction"}>
-                <div  className='form-floating'>
+            <tr className="table table-primary newTransaction">
+                <td className='form-floating'>
+                    <input type="date" id={'new-date-' + member.name} name="date" className="date form-control" defaultValue={new Date().toISOString().slice(0,10)}/>
+                    <label htmlFor="date">Date</label>
+                </td>
+                <td className='form-floating'>
+                    <input type="text" id={'new-category-' + member.name} name="category" placeholder="Category" className="category form-control" />
+                    <label htmlFor="category">Category</label>
+                </td>
+                <td className='form-floating'>
+                    <input type="text" id={'new-description-' + member.name} name="description" placeholder="Description" className="description form-control" />
+                    <label htmlFor="description">Description</label>
+                </td>
+                <td className='form-floating'>
                     <input type="text" id={'new-amount-' + member.name} className="amount form-control" name="amount" placeholder="Amount" />
                     <label htmlFor="amount">Amount</label>
-                </div>
-                <div className='form-floating'>
-                    <input type="text" id={'new-category-' + member.name} name="category" placeholder="Category" className="category form-control" />
-                    <label htmlFor="memberSplit">Category</label>
-                </div>
-                <div className='form-floating'>
-                    <input type="text" id={'new-description-' + member.name} name="description" placeholder="Description" className="description form-control" />
-                    <label htmlFor="memberSplit">Description</label>
-                </div>
-                <div className='form-floating'>
-                    <input type="date" id={'new-date-' + member.name} name="date" className="date form-control" defaultValue={new Date().toISOString().slice(0,10)}/>
-                    <label htmlFor="memberSplit">Date</label>
-                </div>
-                <button id={'new-transaction-' + member.name} className="btn btn-primary" onClick={handleNewTransaction}>
-                    Add
+                </td>
+            </tr>
+            <tr className="table table-primary">
+                <td colSpan={4}>
+                    <button id={'new-transaction-' + member.name} className="btn btn-primary" onClick={handleNewTransaction}>
+                        Add
                     </button>
-            </div>
+                </td>
+            </tr>
         </>
     )
 

@@ -1,12 +1,11 @@
 // Accordion item component containing info for individual members.
 // Controls state for group.members[member]
 import { group } from './Classes'
-import TransactionNew from "./TransactionNew";
 import TransactionsList from "./TransactionsList";
 import { useState } from 'react'
 
 // eslint-disable-next-line
-export default function MemberInfo( {member, updateState} ) {
+export default function MemberInfo( {member} ) {
 
     return (
         <div id={'accordion-item-' + member.name} className="member accordion-item">
@@ -42,7 +41,6 @@ export default function MemberInfo( {member, updateState} ) {
                 aria-labelledby='accordion-collapse'
                 >
                     <div className='accordion-body'>
-                        <TransactionNew member={member} updateState={updateState}/>
                         <TransactionsList member={member} />
                     </div>
             </div>
