@@ -1,18 +1,16 @@
 // "Form" that allows users to enter a new transaction
 import { group } from './Classes'
 
-export default function TransactionNew( {member, updateState} ) {
+export default function TransactionNew( {member, setMembersState} ) {
 
     function handleNewTransaction(e) {
-        console.log(`member is ${member.name}`)
         let container = e.target.parentNode
         let amount = container.querySelector(`.amount`).value
         let category = container.querySelector(`.category`).value
         let description = container.querySelector(`.description`).value
         let date = container.querySelector(`.date`).value
-        console.log(date)
         group.addTransaction(member, amount, category, description, date)
-        updateState()
+        setMembersState()
     }
 
 

@@ -16,7 +16,7 @@ export default function MemberNew( {handleNewMember}) {
                 </div>
                 <button id="btnMemberNew" className="btn btn-primary" onClick={handleNewMember}>
                     Add Member
-                    </button>
+                </button>
             </div>
         </section>
     )

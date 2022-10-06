@@ -26,7 +26,6 @@ export default class Group {
             alert(`The name ${name} is already in use.`)
         }
         this.members[name] = {'name': name, 'split': split || 1, 'contribution': 0, 'transactions': []}
-        console.log(this.members[name])
         return this.toLocalStorage()
     }
 

@@ -2,9 +2,18 @@
 import Transaction from "./Transaction"
 import TransactionNew from "./TransactionNew"
 
-export default function TransactionsList( {member} ) {
+export default function TransactionsList( {member, setMembersState} ) {
     member.transactions.sort( (a, b) => new Date(b.date) - new Date(a.date) )
-    let transactions = member.transactions.map(transaction => <Transaction transaction={transaction} key={transaction.id}/>)
+    let transactions = member.transactions.map(transaction => {
+        return (
+            <Transaction
+                member={member}
+                transaction={transaction}
+                setMembersState={setMembersState}
+                key={transaction.id}
+            />
+        )
+    })
 
     return (
         <>

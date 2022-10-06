@@ -16,7 +16,7 @@ export default function MembersInfo() {
     const memberInfo = Object.values(membersState).map(member => {
         return <MemberInfo
                 member={member}
-                updateState={updateMembersState}
+                setMembersState={updateMembersState}
                 key={member.name}/>
     })
 
