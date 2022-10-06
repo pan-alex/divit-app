@@ -17,24 +17,24 @@ export default function TransactionsList( {member, setMembersState} ) {
 
     return (
         <>
-            <table className="transactionsListing container-lg table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th className="date">Date</th>
-                        <th className="category">Category</th>
-                        <th className="description no-mobile">Description</th>
-                        <th className="amount">Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div className="transactionsListing container-lg table table-striped table-hover">
+                <div className='thead'>
+                    <div className='tr'>
+                        <span className="th date">Date</span>
+                        <span className="th category">Category</span>
+                        <span className="th description no-mobile">Description</span>
+                        <span className="th amount">Amount</span>
+                    </div>
+                </div>
+                <div className='tbody'>
                     {transactions}
-                </tbody>
-            </table>
-            <table className='table'>
-                <tbody>
-                    <TransactionNew member={member} />
-                </tbody>
-            </table>
+                </div>
+            </div>
+            <div className='table'>
+                <div className='tbody'>
+                    <TransactionNew member={member} setMembersState={setMembersState} />
+                </div>
+            </div>
 
         </>
 

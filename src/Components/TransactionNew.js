@@ -4,7 +4,7 @@ import { group } from './Classes'
 export default function TransactionNew( {member, setMembersState} ) {
 
     function handleNewTransaction(e) {
-        let container = e.target.parentNode
+        let container = e.target.parentNode.parentNode
         let amount = container.querySelector(`.amount`).value
         let category = container.querySelector(`.category`).value
         let description = container.querySelector(`.description`).value
@@ -16,31 +16,29 @@ export default function TransactionNew( {member, setMembersState} ) {
 
     return (
         <>
-            <tr className="table table-primary newTransaction">
-                <td className='form-floating'>
+            <div className="tr table table-primary newTransaction">
+                <div className='td form-floating'>
                     <input type="date" id={'new-date-' + member.name} name="date" className="date form-control" defaultValue={new Date().toISOString().slice(0,10)}/>
                     <label htmlFor="date">Date</label>
-                </td>
-                <td className='form-floating'>
+                </div>
+                <div className='td form-floating'>
                     <input type="text" id={'new-category-' + member.name} name="category" placeholder="Category" className="category form-control" />
                     <label htmlFor="category">Category</label>
-                </td>
-                <td className='form-floating'>
+                </div>
+                <div className='td form-floating'>
                     <input type="text" id={'new-description-' + member.name} name="description" placeholder="Description" className="description form-control" />
                     <label htmlFor="description">Description</label>
-                </td>
-                <td className='form-floating'>
+                </div>
+                <div className='td form-floating'>
                     <input type="text" id={'new-amount-' + member.name} className="amount form-control" name="amount" placeholder="Amount" />
                     <label htmlFor="amount">Amount</label>
-                </td>
-            </tr>
-            <tr className="table table-primary">
-                <td colSpan={4}>
+                </div>
+                <div className='tr'>
                     <button id={'new-transaction-' + member.name} className="btn btn-primary" onClick={handleNewTransaction}>
-                        Add
+                            Add
                     </button>
-                </td>
-            </tr>
+                </div>
+            </div>
         </>
     )
 

@@ -76,23 +76,47 @@ table .form-floating > label {
     padding-block: 1.5rem;
 }
 
-tr > .date {
+.tr > .date {
     min-width: 15%;
 }
 
-tr > .category {
+.tr > .category {
     min-width: 25%;
 }
 
-tr > .description {
+.tr > .description {
     min-width: 45%;
 }
 
-tr > .amount {
+.tr > .amount {
     min-width: 15%;
     text-align: right;
 }
 
 table button {
     text-align: center;
+}
+
+/* Transactions Table as Divs */
+
+.table {
+    display: table;
+}
+
+.td, .th {
+    display: table-cell;
+}
+
+.tr {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.thead > .tr {
+    font-weight: bold;
+}
+
+.highlight {
+    background-color: indianred;
 }

@@ -122,28 +122,26 @@ export default class Group {
             date: date
         })
         member.contribution = m(member.contribution + cost)
-        this.calculateShare()
-        return this.toLocalStorage()
+        return this.calculateShare()
     }
 
-    updateTransaction(member, index, cost, category, description, date) {
+    updateTransaction(member, id, cost, category, description, date) {
         cost = m(cost)
-        member.contribution = m(member.contribution + cost - member.transactions[index].cost)
-        member.transactions[index] = {
-            cost:cost,
-            category: category,
-            description: description,
-            date: date
-        }
-        this.calculateShare()
-        return this.toLocalStorage()
+        let transaction = member.transactions.find(t => t.id === id)
+        member.contribution = m(member.contribution + cost - transaction.cost)
+
+        transaction.cost = cost;
+        transaction.category = category;
+        transaction.description = description;
+        transaction.date = date;
+        return this.calculateShare()
     }
 
-    deleteTransaction(member, index) {
-        this.contribution = m(member.contribution - member.transactions[index].cost)
-        this.transactions.splice(index, 1)
-        this.calculateShare()
-        return this.toLocalStorage()
+    deleteTransaction(member, id) {
+        let transaction = member.transactions.find(t => t.id === id)
+        member.contribution = m(member.contribution - transaction.cost)
+        member.transactions = member.transactions.filter(t => t.id !== id)
+        return this.calculateShare()
     }
 }
 

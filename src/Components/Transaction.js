@@ -7,9 +7,9 @@ export default function Transaction( {member, transaction, setMembersState} ) {
 
     if (!edit) {
         return (
-            <tr onClick={() => setEdit(true)}>
+            <div className='tr' onClick={() => setEdit(true)}>
                 <TransactionNoEdit transaction={transaction}/>
-            </tr>
+            </div>
         )
     } else {
         return (
@@ -26,10 +26,10 @@ function TransactionNoEdit( {transaction} ) {
 
     return (
         <>
-            <td className="date">{date}</td>
-            <td className="category">{transaction.category}</td>
-            <td className="description no-mobile">{transaction.description}</td>
-            <td className="amount">$ {transaction.cost.toFixed(2)}</td>
+            <span className="td date">{date}</span>
+            <span className="td category">{transaction.category}</span>
+            <span className="td description no-mobile">{transaction.description}</span>
+            <span className="td amount">$ {transaction.cost.toFixed(2)}</span>
         </>
     )
 }
@@ -37,51 +37,52 @@ function TransactionNoEdit( {transaction} ) {
 function TransactionEdit( {member, transaction, setMembersState, setEditState} ) {
 
     function updateTransaction(event) {
-        let container = event.target.parentNode.parentNode
+        let container = event.target.parentNode.parentNode.querySelector('.transactionInfo')
         let amount = container.querySelector(`.amount`).value
         let category = container.querySelector(`.category`).value
         let description = container.querySelector(`.description`).value
         let date = container.querySelector(`.date`).value
-        group.addTransaction(member, amount, category, description, date)
+        group.updateTransaction(member, transaction.id, amount, category, description, date)
         setMembersState()
         setEditState()
     }
 
+    function deleteTransaction() {
+        group.deleteTransaction(member, transaction.id)
+        setMembersState()
+        setEditState()
+    }
+
+
     return (
-        <>
-        <tr>
-            <td className='form-floating'>
-                <input type="date" name="date" className="date form-control"
-                    defaultValue={transaction.date}/>
-                <label htmlFor="date">Date</label>
-            </td>
-            <td className='form-floating'>
-                <input type="text" name="category" placeholder="Category" className="category form-control"
-                    defaultValue={transaction.category}/>
-                <label htmlFor="category">Category</label>
-            </td>
-            <td className='form-floating'>
-                <input type="text"name="description" placeholder="Description" className="description form-control"
-                    defaultValue={transaction.description}/>
-                <label htmlFor="description">Description</label>
-            </td>
-            <td className='form-floating'>
-                <input type="text" className="amount form-control" name="amount" placeholder="Amount"
-                    defaultValue={transaction.cost.toFixed(2)}/>
-                <label htmlFor="amount">Amount</label>
-            </td>
-        </tr>
-        <div>
-        <button onClick={updateTransaction}>
-                Update
-            </button>
-            <button onClick={() => setMembersState(false)}>
-                Cancel
-            </button>
-            <button onClick={() => setMembersState(false)}>
-                Delete
-            </button>
-        </div>
-    </>
+        <div className='rowGroup highlight'>
+            <div className='tr transactionInfo'>
+                <div className='td form-floating'>
+                    <input type="date" name="date" className="date form-control"
+                        defaultValue={transaction.date}/>
+                    <label htmlFor="date">Date</label>
+                </div>
+                <div className='td form-floating'>
+                    <input type="text" name="category" placeholder="Category" className="category form-control"
+                        defaultValue={transaction.category}/>
+                    <label htmlFor="category">Category</label>
+                </div>
+                <div className='td form-floating'>
+                    <input type="text"name="description" placeholder="Description" className="description form-control"
+                        defaultValue={transaction.description}/>
+                    <label htmlFor="description">Description</label>
+                </div>
+                <div className='td form-floating'>
+                    <input type="text" className="amount form-control" name="amount" placeholder="Amount"
+                        defaultValue={transaction.cost.toFixed(2)}/>
+                    <label htmlFor="amount">Amount</label>
+                </div>
+            </div>
+            <div className='tr'>
+                <button onClick={updateTransaction}>Update</button>
+                <button onClick={() => setMembersState(false)}>Cancel</button>
+                <button onClick={deleteTransaction}>Delete</button>
+            </div>
+    </div>
     )
 }
