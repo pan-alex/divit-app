@@ -80,7 +80,7 @@ function TransactionEdit( {member, transaction, setMembersState, setEditState} )
             </div>
             <div className='tr'>
                 <button onClick={updateTransaction}>Update</button>
-                <button onClick={() => setMembersState(false)}>Cancel</button>
+                <button onClick={() => setEditState(false)}>Cancel</button>
                 <button onClick={deleteTransaction}>Delete</button>
             </div>
     </div>
