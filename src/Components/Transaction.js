@@ -21,10 +21,9 @@ export default function Transaction( {member, transaction, setMembersState} ) {
 
 function TransactionNoEdit( {transaction} ) {
     console.log(transaction.date)
-    let date = new Date(transaction.date)
+    let date = new Date([transaction.date, '00:00']) // Keeps time as midnight local time
     console.log(date)
     date = date.toString().slice(4, 15).split(' ')
-
     date[1] = Number(date[1]) + ',' //Remove leading 0 and add ','
     date = date.join(' ')
 
