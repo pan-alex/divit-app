@@ -1,6 +1,6 @@
 // Component that renders a table row containing a single transaction
 import { group } from "./Classes"
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export default function Transaction( {member, transaction, setMembersState} ) {
     let [edit, setEdit] = useState(false)
@@ -20,7 +20,11 @@ export default function Transaction( {member, transaction, setMembersState} ) {
 
 
 function TransactionNoEdit( {transaction} ) {
-    let date = new Date(transaction.date).toString().slice(4, 15).split(' ')
+    console.log(transaction.date)
+    let date = new Date(transaction.date)
+    console.log(date)
+    date = date.toString().slice(4, 15).split(' ')
+
     date[1] = Number(date[1]) + ',' //Remove leading 0 and add ','
     date = date.join(' ')
 
@@ -35,6 +39,9 @@ function TransactionNoEdit( {transaction} ) {
 }
 
 function TransactionEdit( {member, transaction, setMembersState, setEditState} ) {
+
+    const inputRef = useRef();
+    useEffect( () => inputRef.current.focus(), [])
 
     function updateTransaction(event) {
         let container = event.target.parentNode.parentNode.querySelector('.transactionInfo')
@@ -73,15 +80,15 @@ function TransactionEdit( {member, transaction, setMembersState, setEditState} )
                     <label htmlFor="description">Description</label>
                 </div>
                 <div className='td form-floating'>
-                    <input type="text" className="amount form-control" name="amount" placeholder="Amount"
+                    <input ref={inputRef} type="text" className="amount form-control" name="amount" placeholder="Amount"
                         defaultValue={transaction.cost.toFixed(2)}/>
                     <label htmlFor="amount">Amount</label>
                 </div>
             </div>
-            <div className='tr'>
-                <button onClick={updateTransaction}>Update</button>
-                <button onClick={() => setEditState(false)}>Cancel</button>
-                <button onClick={deleteTransaction}>Delete</button>
+            <div className='btn-row'>
+                <button className='btn btn-primary' onClick={updateTransaction}>Update</button>
+                <button className='btn btn-secondary'onClick={() => setEditState(false)}>Cancel</button>
+                <button className='btn btn-danger btn-sm'onClick={deleteTransaction}>Delete</button>
             </div>
     </div>
     )

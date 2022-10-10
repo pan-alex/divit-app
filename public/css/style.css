@@ -117,6 +117,11 @@ table button {
     font-weight: bold;
 }
 
-.highlight {
-    background-color: indianred;
+.btn-row > button {
+    margin-inline: 1rem;
+}
+
+.table .highlight {
+    background-color: #eee;
+    border-radius: 5px;
 }
