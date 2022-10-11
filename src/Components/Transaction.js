@@ -18,7 +18,7 @@ export default function Transaction( {member, transaction, setMembersState} ) {
     }
 }
 
-
+// Component displaying transaction information as spans
 function TransactionNoEdit( {transaction} ) {
     let date = new Date(transaction.date).toString().slice(4, 15).split(' ')
     date[1] = Number(date[1]) + ',' //Remove leading 0 and add ','
@@ -34,6 +34,7 @@ function TransactionNoEdit( {transaction} ) {
     )
 }
 
+// Component that displays transaction information as inputs and has buttons to allow updating/deleting.
 function TransactionEdit( {member, transaction, setMembersState, setEditState} ) {
 
     const inputRef = useRef();

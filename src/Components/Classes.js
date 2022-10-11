@@ -1,15 +1,10 @@
+// Utility component that exports the global group variable and associated methods.
+
 function m(n) {
     // Converts numbers to "money" by changing them to numbers with 2 decimal places.
     // Longer term use actual currency data types.
     return Number((+n).toFixed(2))
 }
-
-
-//     constructor(name, split) {
-//         this.name = name;
-//         this.contribution = 0;
-//         this.split = split || 0;
-//         this.transactions = []
 
 
 export default class Group {
