@@ -26,12 +26,12 @@ export default class Group {
             alert(`The name ${name} is already in use.`)
         }
         this.members[name] = {'name': name, 'split': split || 1, 'contribution': 0, 'transactions': []}
-        return this.toLocalStorage()
+        return this.calculateShare()
     }
 
     deleteMember(name) {
         delete this.members[name]
-        return this.toLocalStorage()
+        return this.calculateShare()
     }
 
     updateMember(name, newName, newSplit) {
@@ -47,7 +47,7 @@ export default class Group {
                 alert('That name is already being used.')
             }
         }
-        return this.toLocalStorage()
+        return this.calculateShare()
     }
 
     objToGroup(obj) {
@@ -146,5 +146,6 @@ export default class Group {
 }
 
 const group = Group.prototype.fromLocalStorage()
+group.calculateShare()
 
 export { group }

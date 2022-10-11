@@ -5,27 +5,16 @@ import MemberInfo from './MemberInfo'
 import MemberNew from './MemberNew'
 import { useState } from 'react'
 
-export default function MembersInfo() {
-    group.calculateShare()
-    const [membersState, setMembers] = useState(group.members)
-
-    function updateMembersState() {
-        setMembers(prev => { return {...prev} })
-    }
-
-    const memberInfo = Object.values(membersState).map(member => {
-        return <MemberInfo
+export default function MembersInfo( {setMembersState} ) {
+    const memberInfo = Object.values(group.members).map(member => {
+        return (
+            <MemberInfo
                 member={member}
-                setMembersState={updateMembersState}
-                key={member.name}/>
+                setMembersState={setMembersState}
+                key={member.name}
+            />
+        )
     })
-
-    function addMember() {
-        let name = document.querySelector('#memberName').value
-        let split = document.querySelector('#memberSplit').value
-        group.addMember(name, split)
-        updateMembersState()
-    }
 
 
     return (
@@ -33,7 +22,7 @@ export default function MembersInfo() {
             <div className="accordion">
                 { memberInfo }
             </div>
-            <MemberNew handleNewMember={addMember} />
+            <MemberNew setMembersState={setMembersState} />
         </>
     )
 }

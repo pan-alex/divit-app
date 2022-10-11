@@ -1,17 +1,24 @@
 import './App.css';
 import { useState } from 'react';
 import {Group, group} from './Components/Classes';
-// import MembersInfo from './Components/MembersInfo';
-import MemberNew from './Components/MemberNew';
 import MembersInfo from './Components/MembersInfo';
 
+
 function App() {
+  const [membersState, setMembers] = useState(group.members)
+
+  function updateMembersState() {
+      setMembers(prev => { return {...prev} })
+  }
+
   console.log('Starting App')
   console.log(group)
 
+
+
   return (
     <div className="App">
-      <MembersInfo />
+      <MembersInfo membersState={membersState} setMembersState={updateMembersState}/>
     </div>
   );
 }
