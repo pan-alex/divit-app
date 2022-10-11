@@ -8,7 +8,7 @@ export default function Transaction( {member, transaction, setMembersState} ) {
     if (!edit) {
         return (
             <div className='tr' onClick={() => setEdit(true)}>
-                <TransactionNoEdit transaction={transaction}/>
+                <TransactionNoEdit transaction={transaction} />
             </div>
         )
     } else {
@@ -20,10 +20,7 @@ export default function Transaction( {member, transaction, setMembersState} ) {
 
 
 function TransactionNoEdit( {transaction} ) {
-    console.log(transaction.date)
-    let date = new Date([transaction.date, '00:00']) // Keeps time as midnight local time
-    console.log(date)
-    date = date.toString().slice(4, 15).split(' ')
+    let date = new Date(transaction.date).toString().slice(4, 15).split(' ')
     date[1] = Number(date[1]) + ',' //Remove leading 0 and add ','
     date = date.join(' ')
 
@@ -47,7 +44,7 @@ function TransactionEdit( {member, transaction, setMembersState, setEditState} )
         let amount = container.querySelector(`.amount`).value
         let category = container.querySelector(`.category`).value
         let description = container.querySelector(`.description`).value
-        let date = container.querySelector(`.date`).value
+        let date = container.querySelector(`.date`).value + 'T00:00' // keeps midnight local time
         group.updateTransaction(member, transaction.id, amount, category, description, date)
         setMembersState()
         setEditState()

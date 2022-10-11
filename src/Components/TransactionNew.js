@@ -8,7 +8,7 @@ export default function TransactionNew( {member, setMembersState} ) {
         let amount = container.querySelector(`.amount`).value
         let category = container.querySelector(`.category`).value
         let description = container.querySelector(`.description`).value
-        let date = container.querySelector(`.date`).value
+        let date = container.querySelector(`.date`).value + 'T00:00' // keeps midnight local time
         group.addTransaction(member, amount, category, description, date)
         setMembersState()
     }
