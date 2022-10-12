@@ -24,7 +24,7 @@ export default function MemberNew( {setMembersState} ) {
                 <input type="text" ref={memberSplit} id="newMemberSplit" name="personSplit" placeholder="percent" className="form-control" />
                     <label htmlFor="newMemberSplit">Percent</label>
                 </div>
-                <button id="btnMemberNew" className="btn btn-primary" onClick={handleNewMember}>
+                <button id="btnMemberNew" className="btn btn-secondary" onClick={handleNewMember}>
                     Add Member
                 </button>
             </div>

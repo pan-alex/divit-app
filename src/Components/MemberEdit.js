@@ -23,7 +23,7 @@ export default function MemberEdit( {member, setMembersState} ) {
             <input type="text" ref={memberSplit} name="personSplit" placeholder="percent" className="form-control" />
                 <label htmlFor="memberSplit">Percent</label>
             </div>
-            <button id="btnMemberNew" className="btn btn-primary" onClick={handleEditMember}>
+            <button id="btnMemberNew" className="btn btn-secondary" onClick={handleEditMember}>
                 Update
             </button>
      </div>

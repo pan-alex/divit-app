@@ -34,7 +34,7 @@ export default function TransactionNew( {member, setMembersState} ) {
                     <label htmlFor="amount">Amount</label>
                 </div>
                 <div className='tr'>
-                    <button id={'new-transaction-' + member.name} className="btn btn-primary" onClick={handleNewTransaction}>
+                    <button id={'new-transaction-' + member.name} className="btn btn-outline-primary" onClick={handleNewTransaction}>
                             Add
                     </button>
                 </div>

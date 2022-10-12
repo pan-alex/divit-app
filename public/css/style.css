@@ -1,3 +1,21 @@
+.accordion {
+    --bs-accordion-active-color: #000;
+    --bs-accordion-active-bg: rgb(190, 190, 190);
+    --bs-accordion-btn-focus-box-shadow: none;
+    /* --bs-border-color: #dee2e6; */
+}
+
+.accordion-collapse {
+    border: 1px solid var(--bs-border-color);
+    border-top: none;
+    box-shadow: 0 0 2px 1px var(--bs-border-color);
+}
+
+.accordion-button:focus {
+    /* outline: 2px solid orange; */
+    box-shadow: 0 0 0 .25rem var(--bs-border-color);
+}
+
 html {
     font-size: 100%;
 }
@@ -36,16 +54,16 @@ input[type=number] {
 
 
 /* EditPerson component */
-.editPerson {
+.flex-form {
     display: flex;
     margin-bottom: 5rem;
 }
 
-.editPerson > div {
+.flex-form > div {
     flex-basis: 40%;
 }
 
-.editPerson > button {
+.flex-form > button {
     flex-basis: 20%;
 }
 
