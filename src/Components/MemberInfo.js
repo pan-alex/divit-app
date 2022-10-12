@@ -40,6 +40,7 @@ export default function MemberInfo( {member, setMembersState} ) {
                 aria-labelledby='accordion-collapse'
                 >
                     <div className='accordion-body'>
+                        <MemberEdit member={member} setMembersState={setMembersState} />
                         <TransactionsList member={member} setMembersState={setMembersState} />
                     </div>
             </div>
