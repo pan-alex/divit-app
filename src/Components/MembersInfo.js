@@ -6,7 +6,7 @@ import MemberNew from './MemberNew'
 import { useState } from 'react'
 
 export default function MembersInfo( {setMembersState} ) {
-    const memberInfo = Object.values(group.members).map(member => {
+    const memberInfo = group.members.map(member => {
         return (
             <MemberInfo
                 member={member}

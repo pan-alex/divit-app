@@ -6,40 +6,52 @@ function m(n) {
     return Number((+n).toFixed(2))
 }
 
-
-export default class Group {
+class Group {
     constructor() {
         this.nTransactions = 0;
-        this.members = {};
+        this.nMembers = 0;
+        this.members = [];
     }
+    checkNameUnused(name) {
+        let pattern = RegExp(name)
+        if (this.members.find(member => member.name.match(pattern))) {
+            alert(`The name ${name} is already in use.`)
+            return false
+        }
+        return true
+    }
+
+
     addMember(name, split) {
-        if (!name) {
+        if (name.length < 1) {
             alert('Enter a name')
         }
-        let pattern = RegExp(name)
-        if (Object.keys(this.members).find(key => key.match(pattern))) {
-            alert(`The name ${name} is already in use.`)
+        if (this.checkNameUnused) {
+            const id = ++this.nMembers
+            this.members.push({
+                'id': id,
+                'name': name,
+                'split': split || 1,
+                'contribution': 0,
+                'transactions': []})
+            return this.calculateShare()
         }
-        this.members[name] = {'name': name, 'split': split || 1, 'contribution': 0, 'transactions': []}
+    }
+
+    deleteMember(member) {
+        const idx = this.members.indexOf(member)
+        this.members.splice(idx, 1)
         return this.calculateShare()
     }
 
-    deleteMember(name) {
-        delete this.members[name]
-        return this.calculateShare()
-    }
-
-    updateMember(name, newName, newSplit) {
+    updateMember(member, newName, newSplit) {
+        const name = member.name
         if (newSplit) {
-            this.members[name].split = newSplit
+            member.split = newSplit
         }
         if (newName && name !== newName) {
-            if (!this.members[newName]) {
-                this.members[newName] = this.members[name]
-                this.members[newName].name = newName
-                delete this.members[name]
-            } else {
-                alert('That name is already being used.')
+            if (this.checkNameUnused) {
+                member.name = newName
             }
         }
         return this.calculateShare()
@@ -63,8 +75,8 @@ export default class Group {
     // Returns:
     // this: Modifies the input object to add the following property:
         // credit: Number. The amount receiver to the this, based on their contribution minus what they are responsible for (sum * split). The sum of credit for all perople is 0.
-        let sum = Object.values(this.members).reduce( (sum, member) => sum + member.contribution, 0);
-        let splitSum = Object.values(this.members).reduce( (splitSum, member) => splitSum + +member.split, 0)
+        let sum = this.members.reduce( (sum, member) => sum + member.contribution, 0);
+        let splitSum = this.members.reduce( (splitSum, member) => splitSum + +member.split, 0)
         for (let member in this.members) {
             this.members[member].credit = m(this.members[member].contribution - sum * this.members[member].split/splitSum)
         }
@@ -108,7 +120,7 @@ export default class Group {
 
     addTransaction(member, cost, category, description, date) {
         cost = m(cost)
-        this.nTransactions += 1
+        ++this.nTransactions
         member.transactions.push({
             id: this.nTransactions,
             cost:cost,
@@ -143,4 +155,4 @@ export default class Group {
 const group = Group.prototype.fromLocalStorage()
 group.calculateShare()
 
-export { group }
+export { group, Group }

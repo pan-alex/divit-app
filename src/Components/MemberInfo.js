@@ -1,18 +1,19 @@
 // Accordion item component containing info for individual members.
 // Controls state for group.members[member]
+import MemberEdit from "./MemberEdit";
 import TransactionsList from "./TransactionsList";
 
 // eslint-disable-next-line
 export default function MemberInfo( {member, setMembersState} ) {
 
     return (
-        <div id={'accordion-item-' + member.name} className="member accordion-item">
+        <div id={'accordion-item-' + member.id} className="member accordion-item">
             <h2 className="accordion-header" aria-label={member.name}>
                 <button
                     type="button"
                     className="accordion-button collapsed"
                     data-bs-toggle="collapse"
-                    data-bs-target={"#accordion-collapse-" + member.name}
+                    data-bs-target={"#accordion-collapse-" + member.id}
                     aria-expanded="true"
                     aria-controls={"#accordion-collapse-" + member.name}
                     >
@@ -34,7 +35,7 @@ export default function MemberInfo( {member, setMembersState} ) {
                 </button>
             </h2>
             <div
-                id={'accordion-collapse-' + member.name}
+                id={'accordion-collapse-' + member.id}
                 className='accordion-collapse collapse'
                 aria-labelledby='accordion-collapse'
                 >
