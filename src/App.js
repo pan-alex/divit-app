@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import {Group, group} from './Components/Classes';
+import {group} from './Components/Classes';
 import MembersInfo from './Components/MembersInfo';
 
 

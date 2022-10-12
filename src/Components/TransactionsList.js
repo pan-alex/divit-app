@@ -1,19 +1,23 @@
 // Component that renders a table of all of the member's transactions
-import Transaction from "./Transaction"
+import SyncTable from "./SyncTable"
+// import Transaction from "./Transaction"
 import TransactionNew from "./TransactionNew"
+import { useState } from "react"
 
 export default function TransactionsList( {member, setMembersState} ) {
     member.transactions.sort( (a, b) => new Date(b.date) - new Date(a.date) )
-    let transactions = member.transactions.map(transaction => {
-        return (
-            <Transaction
-                member={member}
-                transaction={transaction}
-                setMembersState={setMembersState}
-                key={transaction.id}
-            />
-        )
-    })
+    // let transactions = member.transactions.map(transaction => {
+    //     return (
+    //         <Transaction
+    //             member={member}
+    //             transaction={transaction}
+    //             setMembersState={setMembersState}
+    //             key={transaction.id}
+    //         />
+    //     )
+    // })
+
+    // let [transactions, setTransactions] = useState(member.transactions);
 
     return (
         <>
@@ -27,8 +31,11 @@ export default function TransactionsList( {member, setMembersState} ) {
                     </div>
                 </div>
                 <div className='tbody'>
-                    {transactions}
+                    <SyncTable transactions={member.transactions} />
                 </div>
+                {/* <div className='tbody'>
+                    {transactions}
+                </div> */}
             </div>
             <div className='table'>
                 <div className='tbody'>

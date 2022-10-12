@@ -143,3 +143,16 @@ table button {
     background-color: #eee;
     border-radius: 5px;
 }
+
+/* Grid Table */
+.rgt-cell:not(.rgt-row-edit):not(.rgt-row-not-selectable) {
+    cursor: pointer;
+}
+
+.rgt-row-selected {
+background: #f3f6f9;
+}
+
+.rgt-row-hover {
+background: #f7f7f7;
+}

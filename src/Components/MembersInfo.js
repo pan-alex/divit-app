@@ -3,7 +3,7 @@
 import { group } from './Classes'
 import MemberInfo from './MemberInfo'
 import MemberNew from './MemberNew'
-import { useState } from 'react'
+// import { useState } from 'react'
 
 export default function MembersInfo( {setMembersState} ) {
     const memberInfo = group.members.map(member => {
