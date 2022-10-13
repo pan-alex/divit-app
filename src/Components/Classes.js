@@ -71,10 +71,18 @@ class Group {
         return this.objToGroup(JSON.parse(localStorage.getItem('group'))) || new Group()
     }
 
+    calculateContributions() {
+        this.members.forEach( member => {
+            let sum = member.transactions.reduce( (sum, transaction) => sum += m(transaction.cost), 0)
+            member.contribution = m(sum);
+        })
+    }
+
     calculateShare() {
     // Returns:
     // this: Modifies the input object to add the following property:
         // credit: Number. The amount receiver to the this, based on their contribution minus what they are responsible for (sum * split). The sum of credit for all perople is 0.
+        this.calculateContributions()
         let sum = this.members.reduce( (sum, member) => sum + member.contribution, 0);
         let splitSum = this.members.reduce( (splitSum, member) => splitSum + +member.split, 0)
         for (let member in this.members) {
@@ -129,6 +137,12 @@ class Group {
             date: date
         })
         member.contribution = m(member.contribution + cost)
+        return this.calculateShare()
+    }
+
+    replaceTransactions(member, newTransactions) {
+        console.log(newTransactions)
+        member.transactions = newTransactions
         return this.calculateShare()
     }
 

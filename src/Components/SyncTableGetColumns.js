@@ -1,4 +1,6 @@
+import { group } from './Classes'
 import React from "react";
+
 
 const EDIT_SVG = (
   <svg
@@ -96,7 +98,7 @@ const styles = {
   }
 };
 
-const getColumns = ({ setRowsData }) => {
+const getColumns = ({ transactions, member, setMembersState }) => {
   return [
     {
       id: "checkbox",
@@ -108,6 +110,7 @@ const getColumns = ({ setRowsData }) => {
         id: "2",
         field: "date",
         label: "Date",
+        width: "150px",
         editorCellRenderer: ({
             tableManager,
             value,
@@ -123,8 +126,7 @@ const getColumns = ({ setRowsData }) => {
             onChange={(e) =>
               onChange({ ...data, [column.field]: e.target.value })
             }
-            >
-            </input>
+            />
         )
     },
     {
@@ -140,7 +142,42 @@ const getColumns = ({ setRowsData }) => {
     {
       id: "5",
       field: "cost",
-      label: "Amount"
+      label: "Amount",
+      width: "120px",
+      cellRenderer: ({
+        tableManager,
+        value,
+        data,
+        column,
+        colIndex,
+        rowIndex
+      }) => (
+        <div className="rgt-cell-inner rgt-text-truncate" title={data['cost']}>
+          {'$' + Number(data['cost']).toFixed(2)}
+        </div>
+        ),
+      editorCellRenderer: ({
+        tableManager,
+        value,
+        data,
+        column,
+        colIndex,
+        rowIndex,
+        onChange
+      }) => (
+          <input
+          type='number'
+          value={value}
+          onKeyPress={(e) => {
+            let val = e.key.charCodeAt(0)
+            if ( (val < 48 && val !== 46) || (val > 57) ) e.preventDefault();
+          }}
+          onChange={(e) =>
+            // onChange({ ...data, [column.field]: e.target.value})
+            onChange({ ...data, [column.field]: e.target.value})
+          }
+          />
+      )
     },
     {
       id: "buttons",
@@ -199,7 +236,8 @@ const getColumns = ({ setRowsData }) => {
                 (r) => r.id === data.id
               );
               rowsClone[updatedRowIndex] = data;
-              setRowsData(rowsClone);
+              group.replaceTransactions(member, rowsClone)
+              setMembersState();
               tableManager.rowEditApi.setEditRowId(null);
             }}
           >

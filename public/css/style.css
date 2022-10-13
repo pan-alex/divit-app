@@ -1,20 +1,4 @@
-.accordion {
-    --bs-accordion-active-color: #000;
-    --bs-accordion-active-bg: rgb(190, 190, 190);
-    --bs-accordion-btn-focus-box-shadow: none;
-    /* --bs-border-color: #dee2e6; */
-}
-
-.accordion-collapse {
-    border: 1px solid var(--bs-border-color);
-    border-top: none;
-    box-shadow: 0 0 2px 1px var(--bs-border-color);
-}
-
-.accordion-button:focus {
-    /* outline: 2px solid orange; */
-    box-shadow: 0 0 0 .25rem var(--bs-border-color);
-}
+/* Base styling */
 
 html {
     font-size: 100%;
@@ -28,7 +12,7 @@ html {
     display: none;
 }
 
-@media (min-width: 568px) {
+@media (min-width: 576px) {
     .no-mobile {
         display: block;
     }
@@ -36,7 +20,6 @@ html {
         display: table-cell;
     }
 }
-
 
 /* button {
     min-width: 6rem;
@@ -53,7 +36,38 @@ input[type=number] {
 }
 
 
-/* EditPerson component */
+/* Accordion */
+.accordion {
+    --bs-accordion-active-color: #000;
+    --bs-accordion-active-bg: rgb(190, 190, 190);
+    --bs-accordion-btn-focus-box-shadow: none;
+    --bs-accordion-body-padding-x: 0.25rem;
+    /* --bs-border-color: #dee2e6; */
+}
+
+.accordion-collapse {
+    border: 1px solid var(--bs-border-color);
+    border-top: none;
+    box-shadow: 0 0 2px 1px var(--bs-border-color);
+}
+
+.accordion-button:focus {
+    /* outline: 2px solid orange; */
+    box-shadow: 0 0 0 .25rem var(--bs-border-color);
+}
+
+
+@media (min-width: 576px) {
+    .accordion {
+        --bs-accordion-body-padding-x: 1.25rem;
+    }
+}
+
+
+
+
+
+/* MemberEdit / MemberNew components */
 .flex-form {
     display: flex;
     margin-bottom: 5rem;
@@ -85,74 +99,39 @@ input[type=number] {
 }
 
 
-/* Transactions Table */
-table {
+/* Grid Table */
+
+.rgt-cell-inner {
     text-align: left;
 }
 
-table .form-floating > label {
-    padding-block: 1.5rem;
-}
-
-.tr > .date {
-    min-width: 15%;
-}
-
-.tr > .category {
-    min-width: 25%;
-}
-
-.tr > .description {
-    min-width: 45%;
-}
-
-.tr > .amount {
-    min-width: 15%;
+.rgt-cell[data-column-id='5'] > div { /* Corresponds to the amount column (numeric) */
     text-align: right;
 }
 
-table button {
-    text-align: center;
+
+div.rgt-cell-header, div.rgt-cell-header-inner {
+    background: #f3f6f9;
 }
 
-/* Transactions Table as Divs */
-
-.table {
-    display: table;
-}
-
-.td, .th {
-    display: table-cell;
-}
-
-.tr {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.thead > .tr {
-    font-weight: bold;
-}
-
-.btn-row > button {
-    margin-inline: 1rem;
-}
-
-.table .highlight {
-    background-color: #eee;
-    border-radius: 5px;
-}
-
-/* Grid Table */
 .rgt-cell:not(.rgt-row-edit):not(.rgt-row-not-selectable) {
     cursor: pointer;
 }
 
 .rgt-row-selected {
-background: #f3f6f9;
+    background: #f3f6f9;
 }
 
 .rgt-row-hover {
-background: #f7f7f7;
+    background: #f7f7f7;
+}
+
+.rgt-cell.rgt-cell-pinned-right {
+    position: static;
+}
+
+@media (min-width: 768px) {
+    .rgt-cell.rgt-cell-pinned-right {
+        position: sticky;
+    }
 }

@@ -23,13 +23,13 @@ export default function MemberInfo( {member, setMembersState} ) {
                         <div className="no-mobile">
                             <div className="flex-column">
                                 <span>Contribution</span>
-                                <strong className="h3">${member.contribution}</strong>
+                                <strong className="h3">${(member.contribution).toFixed(2)}</strong>
                             </div>
                         </div>
                         <div>
                             <div className="flex-column">
                                 <span>Credit</span>
-                                <strong className="h3">${member.credit}</strong>
+                                <strong className="h3">${(member.credit).toFixed(2)}</strong>
                             </div>
                         </div>
                 </button>

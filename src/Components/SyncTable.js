@@ -4,14 +4,14 @@ import GridTable from "@nadavshaar/react-grid-table";
 import getColumns from "./SyncTableGetColumns";
 
 
-const SyncTable = ( {transactions} ) => {
-    const [rowsData, setRowsData] = useState(transactions);
+const SyncTable = ( {member, transactions, setMembersState} ) => {
+    const [rowsData, setRowsData] = useState([]);
     // const [isLoading, setLoading] = useState(false);
 
 
     useEffect( () => {
-      setRowsData(prev => [...prev])
-    }, [])
+      setRowsData(transactions)
+    }, [transactions])
 
     // useEffect(() => {
     //   setLoading(true);
@@ -21,9 +21,10 @@ const SyncTable = ( {transactions} ) => {
     //   }
     // }, []);
 
+
     return (
           <GridTable
-            columns={getColumns({ setRowsData })}
+            columns={getColumns({ transactions, member, setMembersState})}
             rows={rowsData}
             isLoading={false}//{isLoading}
             onRowClick={({ rowIndex, data, column, isEdit, event }, tableManager) =>

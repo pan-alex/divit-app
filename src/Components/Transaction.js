@@ -45,7 +45,7 @@ function TransactionEdit( {member, transaction, setMembersState, setEditState} )
         let amount = container.querySelector(`.amount`).value
         let category = container.querySelector(`.category`).value
         let description = container.querySelector(`.description`).value
-        let date = container.querySelector(`.date`).value + 'T00:00' // keeps midnight local time
+        let date = container.querySelector(`.date`).value// + 'T00:00' // keeps midnight local time
         group.updateTransaction(member, transaction.id, amount, category, description, date)
         setMembersState()
         setEditState()
