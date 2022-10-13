@@ -52,7 +52,6 @@ input[type=number] {
 }
 
 .accordion-button:focus {
-    /* outline: 2px solid orange; */
     box-shadow: 0 0 0 .25rem var(--bs-border-color);
 }
 
@@ -111,18 +110,18 @@ input[type=number] {
 
 
 div.rgt-cell-header, div.rgt-cell-header-inner {
-    background: #f3f6f9;
+    background: #e4e7eb;
 }
 
 .rgt-cell:not(.rgt-row-edit):not(.rgt-row-not-selectable) {
     cursor: pointer;
 }
 
-.rgt-row-selected {
+div.rgt-row-selected {
     background: #f3f6f9;
 }
 
-.rgt-row-hover {
+div.rgt-row-hover {
     background: #f7f7f7;
 }
 
