@@ -8,7 +8,7 @@ export default function TransactionsList( {member, setMembersState} ) {
 
     return (
         <>
-            <div className="transactionsListing container-lg">
+            <div className="transactionsListing">
                 <SyncTable member={member} transactions={member.transactions} setMembersState={setMembersState} />
             </div>
             <div>
