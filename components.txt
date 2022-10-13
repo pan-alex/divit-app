@@ -3,9 +3,8 @@
         |- Member info ( { member, setMembersState } )
             |- Edit member info ( { member, setMembersState } )
              \ Transaction List ( { member, setMembersState } )
-                |- Transaction ( { member, transaction, setMembersState } ) [ editState ]
-                    |- No Edit Transaction Info ( {transaction} )
-                    |- Edit Transaction info ( {member, transaction, setMembersState, setEdit} )
+                |- SyncTable ( {member, transaction, setMembersState} )
+                    |- getColumns( {transactions, member, setMemberState} )
                 |- New Transaction ( { member, setMembersState } )
         |- MemberNew ( { membersState } )
 

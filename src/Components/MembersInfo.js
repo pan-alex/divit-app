@@ -16,7 +16,6 @@ export default function MembersInfo( {setMembersState} ) {
         )
     })
 
-
     return (
         <>
             <div className="accordion">

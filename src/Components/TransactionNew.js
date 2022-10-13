@@ -3,6 +3,7 @@ import { group } from './Classes'
 
 export default function TransactionNew( {member, setMembersState} ) {
 
+    // Todo: Replace with useRef
     function handleNewTransaction(e) {
         let container = e.target.parentNode.parentNode
         let amount = container.querySelector(`.amount`).value
