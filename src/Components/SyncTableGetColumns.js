@@ -98,7 +98,7 @@ const styles = {
   }
 };
 
-const getColumns = ({ transactions, member, setMembersState }) => {
+const getColumns = ({ member, setMembersState }) => {
   return [
     {
       id: "checkbox",

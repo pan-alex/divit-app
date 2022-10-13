@@ -141,7 +141,6 @@ class Group {
     }
 
     replaceTransactions(member, newTransactions) {
-        console.log(newTransactions)
         member.transactions = newTransactions
         return this.calculateShare()
     }

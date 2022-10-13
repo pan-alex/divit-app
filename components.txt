@@ -3,7 +3,7 @@
         |- Member info ( { member, setMembersState } )
             |- Edit member info ( { member, setMembersState } )
              \ Transaction List ( { member, setMembersState } )
-                |- SyncTable ( {member, transaction, setMembersState} )
+                |- SyncTable ( {member, transactions, setMembersState} )
                     |- getColumns( {transactions, member, setMemberState} )
                 |- New Transaction ( { member, setMembersState } )
         |- MemberNew ( { membersState } )
