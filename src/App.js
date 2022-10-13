@@ -1,4 +1,3 @@
-import './App.css';
 import { useState } from 'react';
 import {group} from './Components/Classes';
 import MembersInfo from './Components/MembersInfo';
