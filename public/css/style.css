@@ -100,19 +100,23 @@ input[type=number] {
 
 /* Grid Table */
 
-.rgt-cell-inner {
-    text-align: left;
-}
-
-.rgt-cell[data-column-id='5'] > div { /* Corresponds to the amount column (numeric) */
-    text-align: right;
-}
-
-
+/* General styling */
 div.rgt-cell-header, div.rgt-cell-header-inner {
     background: #e4e7eb;
 }
 
+.rgt-cell-inner {
+    text-align: left;
+}
+
+ /* Corresponds to the amount column (numeric) */
+.rgt-cell[data-column-id='5'] > div {
+    text-align: right;
+}
+
+
+
+/* Hover/selected/selectable behaviour */
 .rgt-cell:not(.rgt-row-edit):not(.rgt-row-not-selectable) {
     cursor: pointer;
 }
@@ -125,12 +129,13 @@ div.rgt-row-hover {
     background: #f7f7f7;
 }
 
-.rgt-cell.rgt-cell-pinned-right {
+/* Unsticky last column on mobile */
+.rgt-cell.rgt-cell-pinned-right, .rgt-cell-header.rgt-cell-header-pinned-right {
     position: static;
 }
 
 @media (min-width: 768px) {
-    .rgt-cell.rgt-cell-pinned-right {
+    .rgt-cell.rgt-cell-pinned-right, .rgt-cell-header.rgt-cell-header-pinned-right {
         position: sticky;
     }
 }
