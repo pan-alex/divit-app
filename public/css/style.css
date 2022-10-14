@@ -114,8 +114,6 @@ div.rgt-cell-header, div.rgt-cell-header-inner {
     text-align: right;
 }
 
-
-
 /* Hover/selected/selectable behaviour */
 .rgt-cell:not(.rgt-row-edit):not(.rgt-row-not-selectable) {
     cursor: pointer;
@@ -127,6 +125,7 @@ div.rgt-row-selected {
 
 div.rgt-row-hover {
     background: #f7f7f7;
+    opacity: 1;
 }
 
 /* Unsticky last column on mobile */
@@ -138,4 +137,16 @@ div.rgt-row-hover {
     .rgt-cell.rgt-cell-pinned-right, .rgt-cell-header.rgt-cell-header-pinned-right {
         position: sticky;
     }
+
+    @media (hover: hover) {
+        button[title='Edit'] {
+            opacity: 0.5;
+        }
+
+        button[title='Edit']:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    }
 }
+
