@@ -10,7 +10,7 @@ export default function RepaymentsBox() {
                     <p>{repayment[0] + ' → ' + repayment[1]}</p>
                 </div>
                 <div>
-                    <p>{'$' + repayment[2]}</p>
+                    <p>{'$' + repayment[2].toFixed(2)}</p>
                 </div>
             </li>
         )
@@ -28,7 +28,7 @@ export default function RepaymentsBox() {
                     <div className='card-header'>
                         <h2>Total</h2>
                         <strong className='h3'>
-                            {'$' + group.members.reduce( (sum, member) => sum + member.contribution, 0)}
+                            {'$' + group.members.reduce( (sum, member) => sum + member.contribution, 0).toFixed(2)}
                         </strong>
                     </div>
                     <div className='card-body'>
