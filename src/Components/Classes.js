@@ -96,14 +96,14 @@ class Group {
         // repayments: Array representing the repayments each member should make so that no one owes anyone money. Each element is a subarray representing one payment. It has the format [P, R, Amt] where P = payer, R = receiver, Amt = amount to pay.
         // A greedy approach is utilized where the member with the least credit pays the member with the most credit until all debts are paid.
         this.calculateShare()
-        let members = []
-        for (let member in this.members) {
-            members.push({'name': member, 'credit': this.members[member].credit})
-        }
-        let payers = members.filter( a => a.credit < 0).sort( (a,b) => a.credit - b.credit);
-        let receivers  = members.filter( a => a.credit > 0).sort( (a,b) => b.credit - a.credit);
-        if ( payers.length < 1  || receivers.length < 1) return []
+        let pool = []
+        this.members.map( member => {
+            pool.push({'name': member.name, 'credit': member.credit})
+        })
+        let payers = pool.filter( a => a.credit < 0).sort( (a,b) => a.credit - b.credit);
+        let receivers  = pool.filter( a => a.credit > 0).sort( (a,b) => b.credit - a.credit);
 
+        // if ( payers.length < 1  || receivers.length < 1) return []
         let repayments = []
         do {
             let payer = payers[0];
