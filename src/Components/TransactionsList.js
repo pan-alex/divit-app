@@ -1,6 +1,5 @@
 // Component that renders a table of all of the member's transactions
 import SyncTable from "./SyncTable"
-// import Transaction from "./Transaction"
 import TransactionNew from "./TransactionNew"
 
 export default function TransactionsList( {member, setMembersState} ) {
