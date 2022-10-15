@@ -4,6 +4,11 @@ html {
     font-size: 100%;
 }
 
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
 .hide {
     display: none;
 }
@@ -150,3 +155,13 @@ div.rgt-row-hover {
     }
 }
 
+
+/* Repayments box */
+.repayment {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-body {
+    padding-inline: 2rem;
+}
