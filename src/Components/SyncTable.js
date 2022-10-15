@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 import GridTable from "@nadavshaar/react-grid-table";
 import getColumns from "./SyncTableGetColumns";
 import Information from './SyncTableInformation'
