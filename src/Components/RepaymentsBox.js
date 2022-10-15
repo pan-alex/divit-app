@@ -7,10 +7,10 @@ export default function RepaymentsBox() {
         return (
             <li className='repayment'>
                 <div>
-                    <p>{repayment[0] + ' -> ' + repayment[1]}</p>
+                    <p>{repayment[0] + ' → ' + repayment[1]}</p>
                 </div>
                 <div>
-                    <p>{repayment[2]}</p>
+                    <p>{'$' + repayment[2]}</p>
                 </div>
             </li>
         )
@@ -32,6 +32,7 @@ export default function RepaymentsBox() {
                         </strong>
                     </div>
                     <div className='card-body'>
+                        <p className='h4'>Repayments</p>
                         <ul id='repaymentsList'>
                             {RepaymentItems}
                         </ul>
