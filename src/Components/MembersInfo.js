@@ -2,7 +2,7 @@
 // Controls state for group.members
 import { group } from './Classes'
 import MemberInfo from './MemberInfo'
-import MemberNew from './MemberNew'
+// import MemberNew from './MemberNew'
 // import { useState } from 'react'
 
 
@@ -24,7 +24,7 @@ export default function MembersInfo( {setMembersState} ) {
 
     return (
         <>
-            <div className="accordion">
+            <div>
                 { memberInfo }
             </div>
             <section className="newMember">

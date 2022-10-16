@@ -68,7 +68,39 @@ input[type=number] {
     }
 }
 
+/* According Heading */
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
 
+.accordion-button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.accordion-button > div {
+    flex: 1 1 200px;
+}
+
+
+/* MemberInfo Cards */
+.memberHeader {
+    display: grid;
+    padding-right: 2rem;
+    /* grid-template-columns: 1.5fr 0.5fr 1fr; */
+    grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
+    cursor: pointer;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-between > div {
+    flex: 1 1 300px;
+}
 
 
 
@@ -84,23 +116,6 @@ input[type=number] {
 
 .flex-form > button {
     flex-basis: 20%;
-}
-
-
-/* According Heading */
-.flex-column {
-    display: flex;
-    flex-direction: column;
-    padding-inline: 1rem;
-}
-
-.accordion-button {
-    display: flex;
-    justify-content: space-between;
-}
-
-.accordion-button > div {
-    flex: 1 1 200px;
 }
 
 
@@ -187,7 +202,7 @@ div.rgt-row-hover {
 }
 
 .card-body, .card-header {
-    padding-inline: 2rem;
+    padding-inline: 1rem;
 }
 
 strong {
