@@ -27,10 +27,8 @@ ul {
     }
 }
 
-/* button {
-    min-width: 6rem;
-} */
 
+/* Override default number input appearance */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -39,6 +37,12 @@ input[type=number]::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance:textfield;
+}
+
+
+/* Card component */
+.card-body, .card-header {
+    padding-inline: 1rem;
 }
 
 
@@ -85,13 +89,46 @@ input[type=number] {
 
 
 /* MemberInfo Cards */
+.card {
+    margin-block: 2rem;
+}
+
 .memberHeader {
-    display: grid;
-    padding-right: 2rem;
-    /* grid-template-columns: 1.5fr 0.5fr 1fr; */
-    grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    border-radius: var(--bs-card-border-radius);
     cursor: pointer;
 }
+
+.memberHeader:hover {
+    background-color: #fafafa;
+}
+
+.memberHeaderInfo {
+    width: 95%;
+    display: grid;
+    /* grid-template-columns: 1.5fr 0.5fr 1fr; */
+    grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
+}
+
+.memberMenu {
+    width: 5%;
+}
+
+/* Member Menu pop-up; match style to react grid table */
+div.css-r6z5ec {
+    z-index: 4;
+    background: var(--rgt-background-color);
+    border-radius: 2px;
+    box-shadow: 1px 1px 4px 0 var(--rgt-shadow-color);
+}
+
+.chakra-menu__menuitem {
+    background: none;
+    border: none;
+}
+
 
 .flex-between {
     display: flex;
@@ -149,6 +186,14 @@ div.rgt-row-hover {
     opacity: 1;
 }
 
+.rgt-columns-manager-button {
+    opacity: 0.75;
+}
+
+.rgt-columns-manager-button:hover {
+    opacity: 1;
+}
+
 /* Unsticky last column on mobile */
 .rgt-cell.rgt-cell-pinned-right, .rgt-cell-header.rgt-cell-header-pinned-right {
     position: static;
@@ -199,10 +244,6 @@ div.rgt-row-hover {
     display: flex;
     justify-content: space-between;
     gap: 0.5rem;
-}
-
-.card-body, .card-header {
-    padding-inline: 1rem;
 }
 
 strong {

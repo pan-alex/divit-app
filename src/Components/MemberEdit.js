@@ -2,7 +2,7 @@
 import { group } from './Classes'
 import { useRef } from 'react'
 
-export default function MemberEdit( {member, setMembersState} ) {
+export default function MemberEdit( {member, setMembersState, isVisible, handleIsVisibleToggle} ) {
 
     const memberName = useRef();
     const memberSplit = useRef();
@@ -12,20 +12,23 @@ export default function MemberEdit( {member, setMembersState} ) {
         setMembersState()
     }
 
-
-    return (
-        <div className="container-lg flex-form">
-            <div  className='form-floating'>
-                <input type="text" ref={memberName} className="form-control" name="memberName" placeholder="name" />
-                <label htmlFor="memberName">Name</label>
-            </div>
-            <div className='form-floating'>
-            <input type="text" ref={memberSplit} name="personSplit" placeholder="percent" className="form-control" />
-                <label htmlFor="memberSplit">Percent</label>
-            </div>
-            <button id="btnMemberNew" className="btn btn-secondary" onClick={handleEditMember}>
-                Update
-            </button>
-     </div>
-    )
+    if (isVisible > 0) {
+        return (
+            <div className="container-lg flex-form">
+                <div  className='form-floating'>
+                    <input type="text" ref={memberName} className="form-control" name="memberName" placeholder="name" />
+                    <label htmlFor="memberName">Name</label>
+                </div>
+                <div className='form-floating'>
+                <input type="text" ref={memberSplit} name="personSplit" placeholder="percent" className="form-control" />
+                    <label htmlFor="memberSplit">Percent</label>
+                </div>
+                <button id="btnMemberNew" className="btn btn-secondary" onClick={handleEditMember}>
+                    Update
+                </button>
+         </div>
+        )
+    } else {
+        return <></>
+    }
 }

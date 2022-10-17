@@ -2,10 +2,10 @@
 import SyncTable from "./SyncTable"
 import TransactionNew from "./TransactionNew"
 
-export default function TransactionsList( {member, toggleVisibility, setMembersState} ) {
+export default function TransactionsList( {member, setMembersState, isVisible, handleIsVisibleToggle} ) {
     member.transactions.sort( (a, b) => new Date(b.date) - new Date(a.date) )
 
-    if (toggleVisibility > 0) {
+    if (isVisible > 0) {
         return (
             <>
                 <div className="transactionsListing">
@@ -14,6 +14,9 @@ export default function TransactionsList( {member, toggleVisibility, setMembersS
                 <div>
                     <TransactionNew member={member} setMembersState={setMembersState} />
                 </div>
+                <button className='btn btn-outline-secondary' onClick={handleIsVisibleToggle}>
+                    Collapse
+                </button>
             </>
 
         )
