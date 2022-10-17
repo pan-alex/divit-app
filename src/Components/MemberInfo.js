@@ -17,7 +17,6 @@ export default function MemberInfo( {member, setMembersState} ) {
 
     function handleToggleMemberEdit(e) {
         setMemberEditVisible(memberEditVisible * -1)
-        e.stopPropagation()
     }
 
     return (
