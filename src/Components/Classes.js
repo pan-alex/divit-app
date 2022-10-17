@@ -102,7 +102,7 @@ class Group {
         let payers = pool.filter( a => a.credit < 0).sort( (a,b) => a.credit - b.credit);
         let receivers  = pool.filter( a => a.credit > 0).sort( (a,b) => b.credit - a.credit);
 
-        // if ( payers.length < 1  || receivers.length < 1) return []
+        if ( payers.length < 1  || receivers.length < 1) return []
         let repayments = []
         do {
             let payer = payers[0];
