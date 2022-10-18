@@ -3,15 +3,12 @@
 import MemberEdit from "./MemberEdit";
 import TransactionsList from "./TransactionsList";
 import MemberHeader from "./MemberHeader";
-import MemberMenu from "./MemberMenu";
-import { useState, useContext } from 'react'
-import { GroupContext } from '../App'
+import { useState } from 'react'
 
 
 
 // eslint-disable-next-line
 export default function MemberInfo( {member} ) {
-    const [, setMembersState] = useContext(GroupContext)
     const [transactionsVisible, setTransactionsVisible] = useState(-1);
     const [memberEditVisible, setMemberEditVisible] = useState(-1);
 
