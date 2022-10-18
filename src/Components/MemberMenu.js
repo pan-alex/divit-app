@@ -4,14 +4,10 @@ import {
     MenuButton,
     MenuList,
     MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuDivider,
   } from '@chakra-ui/react'
+import MemberDelete from './MemberDelete';
 
-
-export default function MemberMenu() {
-
+export default function MemberMenu( {member}) {
     return (
         <Menu className='memberMenu'>
             <MenuButton className='menuButton rgt-columns-manager-button' onClick={e => e.stopPropagation()}>
@@ -21,7 +17,7 @@ export default function MemberMenu() {
             </MenuButton>
             <MenuList className='menuList' onClick={e => e.stopPropagation()}>
                 <MenuItem>Edit</MenuItem>
-                <MenuItem>Delete</MenuItem>
+                <MemberDelete member={member} />
             </MenuList>
         </Menu>
     )

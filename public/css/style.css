@@ -129,12 +129,18 @@ div.css-r6z5ec {
     box-shadow: 1px 1px 4px 0 var(--rgt-shadow-color);
 }
 
-
 .chakra-menu__menuitem {
     background: none;
     border: none;
 }
 
+.chakra-modal__content button {
+    margin-left: 1rem;
+}
+
+.chakra-modal__close-btn {
+    border: none;
+}
 
 .flex-between {
     display: flex;
