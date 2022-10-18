@@ -7,6 +7,7 @@ const EDIT_SVG = (
     height="25"
     viewBox="0 0 25 25"
     width="25"
+    stroke-width='1'
     xmlns="http://www.w3.org/2000/svg"
   >
     <g fill="#fff" stroke="#1856bf" transform="translate(4 4)">
@@ -23,6 +24,7 @@ const CANCEL_SVG = (
     height="25"
     viewBox="0 0 25 25"
     width="25"
+    stroke-width='2'
     xmlns="http://www.w3.org/2000/svg"
   >
     <g fill="none" stroke="#dc1e1e" transform="translate(7 7)">
@@ -36,6 +38,7 @@ const SAVE_SVG = (
     height="25"
     viewBox="0 0 25 25"
     width="25"
+    stroke-width='2'
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
@@ -59,7 +62,7 @@ const styles = {
   },
   editButton: {
     background: "#f3f3f3",
-    outline: "none",
+    // outline: "none",
     cursor: "pointer",
     padding: 4,
     display: "inline-flex",
@@ -77,7 +80,7 @@ const styles = {
   },
   cancelButton: {
     background: "#f3f3f3",
-    outline: "none",
+    // outline: "none",
     cursor: "pointer",
     marginRight: 10,
     padding: 2,
@@ -88,7 +91,7 @@ const styles = {
   },
   saveButton: {
     background: "#f3f3f3",
-    outline: "none",
+    // outline: "none",
     cursor: "pointer",
     padding: 2,
     display: "inline-flex",
@@ -219,6 +222,7 @@ const getColumns = ({ member, setMembersState }) => {
           <button
             title="Cancel"
             style={styles.cancelButton}
+            tabIndex={0}
             onClick={(e) => {
               e.stopPropagation();
               tableManager.rowEditApi.setEditRowId(null);
@@ -229,6 +233,7 @@ const getColumns = ({ member, setMembersState }) => {
           <button
             title="Save"
             style={styles.saveButton}
+            tabIndex={0}
             onClick={(e) => {
               e.stopPropagation();
               let rowsClone = [...tableManager.rowsApi.rows];
