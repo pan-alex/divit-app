@@ -1,7 +1,10 @@
 // "Form" that allows users to enter a new transaction
 import { group } from './Classes'
+import { useContext } from 'react'
+import { GroupContext } from '../App'
 
-export default function TransactionNew( {member, setMembersState} ) {
+export default function TransactionNew( { member } ) {
+    const [, setMembersState] = useContext(GroupContext)
 
     // Todo: Replace with useRef
     function handleNewTransaction(e) {

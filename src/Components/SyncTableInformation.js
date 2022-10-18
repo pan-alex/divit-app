@@ -1,5 +1,7 @@
-import React from "react";
 import { group } from "./Classes";
+import { useContext } from 'react'
+import { GroupContext } from '../App'
+
 
 const Information = ({
     tableManager,
@@ -24,12 +26,14 @@ const Information = ({
         rowSelectionApi: { setSelectedRowsIds },
     } = tableManager;
 
+    const [, setMembersState] = useContext(GroupContext)
+
     let classNames = (
         "rgt-footer-items-information " + (additionalProps.className || "")
     ).trim();
 
     // **Load in custom props
-    const { member, setMembersState } = additionalProps.props;
+    const { member } = additionalProps.props;
 
     return (
         <div {...additionalProps} className={classNames}>
@@ -44,7 +48,7 @@ const Information = ({
                             }`
                   }`}{" "}
             {tableHasSelection ? (
-                <React.Fragment>
+                <>
                     {`| ${selectedCount} ${selectedText}`}
                     {selectedCount ? (
                         <span
@@ -65,7 +69,7 @@ const Information = ({
                             {clearSelectionIcon}
                         </span>
                     ) : null}
-                </React.Fragment>
+                </>
             ) : (
                 ""
             )}

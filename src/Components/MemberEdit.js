@@ -1,9 +1,10 @@
 // Component that, when visible, allows users to update a member's info or delete the member.
 import { group } from './Classes'
-import { useRef } from 'react'
+import { useRef, useContext } from 'react'
+import { GroupContext } from '../App'
 
-export default function MemberEdit( {member, setMembersState, isVisible, handleIsVisibleToggle} ) {
-
+export default function MemberEdit( {member, isVisible, handleIsVisibleToggle} ) {
+    const [, setMembersState] = useContext(GroupContext)
     const memberName = useRef();
     const memberSplit = useRef();
 

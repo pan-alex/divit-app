@@ -4,14 +4,15 @@ import { group } from './Classes'
 import MemberInfo from './MemberInfo'
 // import MemberNew from './MemberNew'
 // import { useState } from 'react'
+import { useContext } from 'react'
+import { GroupContext } from '../App'
 
-
-export default function MembersInfo( {setMembersState} ) {
+export default function MembersInfo() {
+    const [, setMembersState] = useContext(GroupContext)
     const memberInfo = group.members.map(member => {
         return (
             <MemberInfo
                 member={member}
-                setMembersState={setMembersState}
                 key={member.id}
             />
         )
@@ -28,11 +29,8 @@ export default function MembersInfo( {setMembersState} ) {
                 { memberInfo }
             </div>
             <section className="newMember">
-                {/* <IconButton icon='+'/> */}
                 <button arial-label='Add new member' onClick={handleNewMember}>+</button>
             </section>
-
-            {/* <MemberNew setMembersState={setMembersState} /> */}
         </>
     )
 }

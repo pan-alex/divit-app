@@ -1,12 +1,16 @@
 |- App [ membersState ]
-    |- Members info ( { member, setMembersState } )
-        |- Member info ( { member, setMembersState } )
-            |- Edit member info ( { member, setMembersState } )
-             \ Transaction List ( { member, setMembersState } )
-                |- SyncTable ( {member, transactions, setMembersState} )
+    > Context: [memberState, setMemberState]
+    |- Members info ( { member} )
+        |- Member info ( { member} )
+            |- MemberHeader ( {member, handleClick})
+                |- MemberHeaderInfo ( {member} )
+                |- MemberMenu ( {member} )
+            |- Edit member info ( { member } )
+             \ Transaction List ( { member } )
+                |- SyncTable ( {member, transactions } )
                     |- getColumns( {transactions, member, setMemberState} )
                     |- Information( {member, setMemberState} )
-                |- New Transaction ( { member, setMembersState } )
+                |- New Transaction ( { member } )
         |- MemberNew ( { membersState } )
 
     |- RepaymentsBox

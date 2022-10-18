@@ -2,9 +2,11 @@
 import GridTable from "@nadavshaar/react-grid-table";
 import getColumns from "./SyncTableGetColumns";
 import Information from './SyncTableInformation'
+import { useContext } from 'react'
+import { GroupContext } from '../App'
 
-
-const SyncTable = ( {member, transactions, setMembersState} ) => {
+const SyncTable = ( {member, transactions } ) => {
+  const [, setMembersState] = useContext(GroupContext)
   // const [isLoading, setLoading] = useState(false);
 
     function handleSelectRow({ rowIndex, data, column, isEdit, event }, tableManager) {
@@ -24,7 +26,7 @@ const SyncTable = ( {member, transactions, setMembersState} ) => {
             }
             additionalProps={{
               information: { // Additional Props for information component
-                'props': {'member': member, 'setMembersState': setMembersState}
+                'props': {'member': member}
               }
             }}
             components={ {Information} }
