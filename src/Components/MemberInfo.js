@@ -2,6 +2,7 @@
 // Controls state for group.members[member]
 import MemberEdit from "./MemberEdit";
 import TransactionsList from "./TransactionsList";
+import MemberHeader from "./MemberHeader";
 import MemberMenu from "./MemberMenu";
 import { useState } from 'react'
 
@@ -22,24 +23,7 @@ export default function MemberInfo( {member, setMembersState} ) {
     return (
         <div className='container-sm' style={{'maxWidth': '1000px'}}>
             <div className='card'>
-                <div className='memberHeader' onClick={handleToggleTransactionList}>
-                    <div className='memberHeaderInfo'>
-                        <div>
-                            <h3>{member.name}</h3>
-                        </div>
-                        <div className="flex-between">
-                            <div className="flex-column text-end">
-                                <span>Contribution</span>
-                                <strong className="h3">${(member.contribution).toFixed(2)}</strong>
-                            </div>
-                            <div className="flex-column text-end">
-                                <span>Credit</span>
-                                <strong className="h3">${(member.credit).toFixed(2)}</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <MemberMenu />
-                </div>
+                <MemberHeader member={member} handleClick={handleToggleTransactionList}/>
                 <MemberEdit
                     member={member}
                     setMembersState={setMembersState}
