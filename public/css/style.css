@@ -40,52 +40,34 @@ input[type=number] {
 }
 
 
+/* Flex utility classes */
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+
+
 /* Card component */
 .card-body, .card-header {
     padding-inline: 1rem;
 }
 
 
-/* Accordion */
-.accordion {
-    --bs-accordion-active-color: #000;
-    --bs-accordion-active-bg: #e4e7eb;
-    --bs-accordion-btn-focus-box-shadow: none;
-    --bs-accordion-body-padding-x: 0.25rem;
-    /* --bs-border-color: #dee2e6; */
-}
-
-.accordion-collapse {
-    border: 1px solid var(--bs-border-color);
-    border-top: none;
-    box-shadow: 0 0 2px 1px var(--bs-border-color);
-}
-
-.accordion-button:focus {
-    box-shadow: 0 0 0 .25rem rgba(161, 197, 245, 0.75);
-}
-
-
-@media (min-width: 576px) {
-    .accordion {
-        --bs-accordion-body-padding-x: 1.25rem;
-    }
-}
-
-/* According Heading */
-.flex-column {
-    display: flex;
-    flex-direction: column;
-}
-
-.accordion-button {
-    display: flex;
-    justify-content: space-between;
-}
-
-.accordion-button > div {
-    flex: 1 1 200px;
-}
 
 
 /* MemberInfo Cards */
@@ -98,7 +80,6 @@ input[type=number] {
     justify-content: space-between;
     padding: 0.5rem 0.5rem 0.5rem 1rem;
     border-radius: var(--bs-card-border-radius);
-    cursor: pointer;
 }
 
 .memberHeader:hover {
@@ -154,17 +135,11 @@ div.css-r6z5ec {
 
 
 /* MemberEdit / MemberNew components */
-.flex-form {
+.memberEdit {
+    margin: 0 auto;
     display: flex;
-    margin-bottom: 5rem;
-}
-
-.flex-form > div {
-    flex-basis: 40%;
-}
-
-.flex-form > button {
-    flex-basis: 20%;
+    justify-content: center;
+    flex-direction: column;
 }
 
 

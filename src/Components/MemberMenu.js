@@ -7,7 +7,7 @@ import {
   } from '@chakra-ui/react'
 import MemberDelete from './MemberDelete';
 
-export default function MemberMenu( {member}) {
+export default function MemberMenu( {member, toggleMemberEdit}) {
     return (
         <Menu className='memberMenu'>
             <MenuButton className='menuButton rgt-columns-manager-button' onClick={e => e.stopPropagation()}>
@@ -16,7 +16,7 @@ export default function MemberMenu( {member}) {
                 </svg>
             </MenuButton>
             <MenuList className='menuList' onClick={e => e.stopPropagation()}>
-                <MenuItem>Edit</MenuItem>
+                <MenuItem onClick={toggleMemberEdit}>Edit</MenuItem>
                 <MemberDelete member={member} />
             </MenuList>
         </Menu>
