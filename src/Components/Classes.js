@@ -12,6 +12,7 @@ class Group {
         this.nMembers = 0;
         this.members = [];
     }
+
     checkNameUnused(name) {
         let pattern = RegExp(name)
         if (this.members.find(member => member.name.match(pattern))) {
@@ -21,19 +22,21 @@ class Group {
         return true
     }
 
-
     addMember(name, split) {
-        if (name.length < 1) {
-            alert('Enter a name')
+        let newFlag = -1
+        if (!name || name.length < 1) {
+            name = `Person ` + (this.nMembers+1)
+            newFlag = 1
         }
-        if (this.checkNameUnused) {
+        if (this.checkNameUnused(name)) {
             const id = ++this.nMembers
             this.members.push({
                 'id': id,
                 'name': name,
                 'split': split || 1,
                 'contribution': 0,
-                'transactions': []})
+                'transactions': [],
+                'newFlag': newFlag})
             return this.calculateShare()
         }
     }
@@ -45,12 +48,14 @@ class Group {
     }
 
     updateMember(member, newName, newSplit) {
-        const name = member.name
+        const name = member.name;
+        member.newFlag = -1;
         if (newSplit) {
+            console.log(newSplit)
             member.split = newSplit
         }
         if (newName && name !== newName) {
-            if (this.checkNameUnused) {
+            if (this.checkNameUnused(newName)) {
                 member.name = newName
             }
         }

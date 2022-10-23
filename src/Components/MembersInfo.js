@@ -19,7 +19,7 @@ export default function MembersInfo() {
     })
 
     function handleNewMember() {
-        group.addMember('AAA')
+        group.addMember()
         setMembersState()
     }
 

@@ -1,14 +1,17 @@
 // Component that acts as header for the member. Contains high level information about the member.
+import { group } from './Classes'
 import { useState } from 'react'
 import MemberMenu from "./MemberMenu"
 import MemberEdit from './MemberEdit'
 
 
 export default function MemberHeader( {member, handleToggleTransactionList} ) {
-    const [memberEditMode, setMemberEditMode] = useState(-1)
+     //newFlag property set to 1 for entries created via button-press as hacky way to render the new element in edit mode.
+    const [memberEditMode, setMemberEditMode] = useState(member.newFlag || -1)
 
     function toggleMemberEdit() {
         setMemberEditMode(value => value * -1) // -1 = Not edit mode; 1 = edit mode
+        group.updateMember(member); // Hacky implementation to update newFlag to -1.
     }
 
     if (memberEditMode > 0) {
