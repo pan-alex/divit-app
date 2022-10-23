@@ -153,6 +153,11 @@ div.css-r6z5ec {
     flex-direction: column;
 }
 
+.memberEdit button {
+    min-width: 6rem;
+    margin-inline: 0.5rem;
+}
+
 
 /* Grid Table */
 

@@ -10,22 +10,30 @@ export default function MemberEdit( {member, handleIsVisibleToggle} ) {
     const memberSplit = useRef();
 
     function handleEditMember() {
-        group.updateMember(member, memberName.current.value, memberSplit.current.value);
-        setMembersState()
-        handleIsVisibleToggle()
+        try {
+            group.updateMember(member, memberName.current.value, memberSplit.current.value);
+            setMembersState()
+            handleIsVisibleToggle()
+        } catch {
+            alert(`The name ${memberName.current.value} is already in use.`)
+        }
     }
 
 
     return (
         <>
             <div className="container-lg memberEdit">
-                <div  className='form-floating'>
-                    <input type="text" ref={memberName} className="form-control" name="memberName" placeholder={member.name} />
-                    <label htmlFor="memberName">Name</label>
+                <div className='mb-3 row'>
+                    <label className='col-form-label col-sm-2' htmlFor="memberName">Name</label>
+                    <div className='col-sm-10'>
+                        <input type="text" className="form-control" ref={memberName} name="memberName" placeholder={member.name} autoFocus/>
+                    </div>
                 </div>
-                <div className='form-floating'>
-                   <input type="text" ref={memberSplit} name="personSplit" placeholder="percent" className="form-control" />
-                    <label htmlFor="memberSplit">Percent</label>
+                <div className='mb-3 row'>
+                    <label className='col-form-label col-sm-2' htmlFor="memberSplit">Split</label>
+                    <div className='col-sm-10'>
+                        <input type="text" className="form-control" ref={memberSplit} name="personSplit" placeholder={member.split} />
+                    </div>
                 </div>
                 <div className='flex-center'>
                 <button className="btn btn-light" onClick={handleEditMember}>

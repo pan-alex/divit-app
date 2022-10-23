@@ -14,10 +14,9 @@ class Group {
     }
 
     checkNameUnused(name) {
-        let pattern = RegExp(name)
-        if (this.members.find(member => member.name.match(pattern))) {
-            alert(`The name ${name} is already in use.`)
-            return false
+        let pattern = name.toLowerCase()
+        if (this.members.some(member => member.name.toLowerCase() === pattern)) {
+            throw new Error(`The name ${name} is already in use.`)
         }
         return true
     }
