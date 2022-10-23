@@ -20,6 +20,7 @@ const SyncTable = ( {member, transactions } ) => {
             columns={getColumns({ member, setMembersState})}
             rows={transactions}
             isLoading={false}//{isLoading}
+            enableColumnsReorder={false}
             onRowClick={
               ( { rowIndex, data, column, isEdit, event }, tableManager ) =>
                 handleSelectRow({ rowIndex, data, column, isEdit, event }, tableManager)
