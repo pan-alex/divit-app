@@ -1,0 +1,20 @@
+|- App [ membersState ]
+    > Context: [memberState, setMemberState]
+    |- Members info ( { member} )
+        |- Member info ( { member} )
+            |- MemberHeader ( {member, handleClick})
+                |- MemberHeaderInfo ( {member} )
+                |- MemberMenu ( {member} )
+            |- Edit member info ( { member } )
+             \ Transaction List ( { member } )
+                |- SyncTable ( {member, transactions } )
+                    |- getColumns( {transactions, member, setMemberState} )
+                    |- Information( {member, setMemberState} )
+                |- New Transaction ( { member } )
+        |- MemberNew ( { membersState } )
+
+    |- RepaymentsBox
+        |-
+        |- Repayments List
+
+    |- Reset

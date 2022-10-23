@@ -1,7 +1,34 @@
-/* button {
-    min-width: 6rem;
-} */
+/* Base styling */
 
+html {
+    font-size: 100%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.hide {
+    display: none;
+}
+
+.no-mobile {
+    display: none;
+}
+
+@media (min-width: 576px) {
+    .no-mobile {
+        display: block;
+    }
+    td.no-mobile {
+        display: table-cell;
+    }
+}
+
+
+/* Override default number input appearance */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -13,75 +40,219 @@ input[type=number] {
 }
 
 
-/* EditPerson component */
-.editPerson {
+/* Flex utility classes */
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-form {
     display: flex;
     margin-bottom: 5rem;
 }
 
-.editPerson > div {
+.flex-form > div {
     flex-basis: 40%;
 }
 
-.editPerson > button {
+.flex-form > button {
     flex-basis: 20%;
 }
 
-/* New newTransaction component */
 
-.newTransaction > * {
-    margin-top: 0.5rem;
+
+
+/* Card component */
+.card-body, .card-header {
+    padding-inline: 1rem;
 }
 
-.newTransaction > button {
-    width: 100%;
+
+
+
+/* MemberInfo Cards */
+.card {
+    margin-block: 2rem;
+}
+
+.memberHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    border-radius: var(--bs-card-border-radius);
+}
+
+.memberHeader.hover:hover {
+    background-color: #fafafa;
+}
+
+.memberHeaderInfo {
+    width: 95%;
+    display: grid;
+    /* grid-template-columns: 1.5fr 0.5fr 1fr; */
+    grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
+}
+
+.memberMenu {
+    width: 5%;
+}
+
+.menuButton span {
+    line-height: 0;
+}
+
+/* Member Menu pop-up; match style to react grid table */
+div.css-r6z5ec {
+    z-index: 4;
+    background: var(--rgt-background-color);
+    border-radius: 2px;
+    box-shadow: 1px 1px 4px 0 var(--rgt-shadow-color);
+}
+
+
+.chakra-menu__menuitem {
+    background: none;
+    border: none;
+}
+
+.chakra-modal__content {
+    top: 25%;
+}
+
+.chakra-modal__content button {
+    margin-left: 1rem;
+}
+
+.chakra-modal__close-btn {
+    border: none;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-between > div {
+    flex: 1 1 300px;
+}
+
+
+
+/* MemberEdit / MemberNew components */
+.memberEdit {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.memberEdit button {
+    min-width: 6rem;
+    margin-inline: 0.5rem;
+}
+
+
+/* Grid Table */
+
+/* General styling */
+div.rgt-cell-header, div.rgt-cell-header-inner {
+    background: #e4e7eb;
+}
+
+.rgt-cell-inner {
+    text-align: left;
+}
+
+ /* Corresponds to the amount column (numeric) */
+.rgt-cell[data-column-id='5'] > div {
+    text-align: right;
+}
+
+/* Hover/selected/selectable behaviour */
+.rgt-cell:not(.rgt-row-edit):not(.rgt-row-not-selectable) {
+    cursor: pointer;
+}
+
+div.rgt-row-selected {
+    background: #f3f6f9;
+}
+
+div.rgt-row-hover {
+    background: #f7f7f7;
+    opacity: 1;
+}
+
+.rgt-columns-manager-button {
+    opacity: 0.75;
+}
+
+.rgt-columns-manager-button:hover {
+    opacity: 1;
+}
+
+/* Unsticky last column on mobile */
+.rgt-cell.rgt-cell-pinned-right, .rgt-cell-header.rgt-cell-header-pinned-right {
+    position: static;
 }
 
 @media (min-width: 768px) {
-    .newTransaction {
-        display: flex;
-        flex-wrap: wrap;
+    .rgt-cell.rgt-cell-pinned-right, .rgt-cell-header.rgt-cell-header-pinned-right {
+        position: sticky;
     }
 
-    .newTransaction > * {
-        flex-basis: 15%;
-    }
+    @media (hover: hover) {
+        button[title='Edit'] {
+            opacity: 0.5;
+        }
 
-    .newTransaction .description {
-        flex-basis: 40%;
+        button[title='Edit']:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
     }
 }
 
 
-/* newTransactions Listing component */
-
-.transactionsListing {
-    margin-top: 4rem;
+/* New Member button */
+.newMember {
+    display: flex;
+    justify-content: center;
+    padding-block: 2rem;
 }
 
-.transaction > * {
-    margin-top: 0.5rem;
+.newMember > button {
+    height: 2.5rem;
+    min-width: 2.5rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--bs-border-color);
+    background: #fff;
 }
 
-.transaction > button {
-    width: 50%;
+
+/* Repayments box */
+
+#repayments {
+    max-width: 578px;
+    margin: 0 auto;
 }
 
-@media (min-width: 0px) {
-    .transaction {
-        display: flex;
-        flex-wrap: wrap;
-    }
+.repayment {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
 
-    .transaction > input {
-        flex-basis: 15%;
-    }
-
-    .transaction > button {
-        flex-basis: 10%;
-    }
-
-    .transaction .description {
-        flex-basis: 24%;
-    }
+strong {
+    font-weight: bold;
 }
