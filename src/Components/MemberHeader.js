@@ -19,7 +19,7 @@ export default function MemberHeader( {member, handleToggleTransactionList} ) {
         )
     } else {
         return (
-            <div className='memberHeader' style={{cursor:'pointer'}} onClick={handleToggleTransactionList}>
+            <div className='memberHeader hover' style={{cursor:'pointer'}} onClick={handleToggleTransactionList}>
                 <MemberHeaderInfo member={member} />
                 <MemberMenu member={member} toggleMemberEdit={toggleMemberEdit} />
             </div>

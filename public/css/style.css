@@ -57,7 +57,18 @@ input[type=number] {
     justify-content: space-between;
 }
 
+.flex-form {
+    display: flex;
+    margin-bottom: 5rem;
+}
 
+.flex-form > div {
+    flex-basis: 40%;
+}
+
+.flex-form > button {
+    flex-basis: 20%;
+}
 
 
 
@@ -82,7 +93,7 @@ input[type=number] {
     border-radius: var(--bs-card-border-radius);
 }
 
-.memberHeader:hover {
+.memberHeader.hover:hover {
     background-color: #fafafa;
 }
 

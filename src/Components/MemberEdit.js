@@ -2,7 +2,7 @@
 import { group } from './Classes'
 import { useRef, useContext } from 'react'
 import { GroupContext } from '../App'
-
+import {Checkmark, Crossmark} from './Icons'
 
 export default function MemberEdit( {member, handleIsVisibleToggle} ) {
     const [, setMembersState] = useContext(GroupContext)
@@ -27,12 +27,14 @@ export default function MemberEdit( {member, handleIsVisibleToggle} ) {
                    <input type="text" ref={memberSplit} name="personSplit" placeholder="percent" className="form-control" />
                     <label htmlFor="memberSplit">Percent</label>
                 </div>
-                <button className="btn btn-primary" onClick={handleEditMember}>
-                    Update
+                <div className='flex-center'>
+                <button className="btn btn-light" onClick={handleEditMember}>
+                    <Checkmark />
                 </button>
-                <button className="btn btn-outline-secondary" onClick={handleIsVisibleToggle}>
-                    Cancel
+                <button className="btn btn-light" onClick={handleIsVisibleToggle}>
+                    <Crossmark />
                 </button>
+                </div>
             </div>
         </>
     )
