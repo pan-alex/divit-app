@@ -82,7 +82,6 @@ const styles = {
     background: "#f3f3f3",
     // outline: "none",
     cursor: "pointer",
-    marginRight: 10,
     padding: 2,
     display: "inline-flex",
     border: "none",
@@ -93,6 +92,7 @@ const styles = {
     background: "#f3f3f3",
     // outline: "none",
     cursor: "pointer",
+    marginRight: 10,
     padding: 2,
     display: "inline-flex",
     border: "none",
@@ -199,6 +199,7 @@ const getColumns = ({ member, setMembersState }) => {
         <div style={styles.buttonsCellContainer}>
           <button
             title="Edit"
+            aria-label="Edit"
             style={styles.editButton}
             onClick={(e) => {
               e.stopPropagation();
@@ -220,18 +221,8 @@ const getColumns = ({ member, setMembersState }) => {
       }) => (
         <div style={styles.buttonsCellEditorContainer}>
           <button
-            title="Cancel"
-            style={styles.cancelButton}
-            tabIndex={0}
-            onClick={(e) => {
-              e.stopPropagation();
-              tableManager.rowEditApi.setEditRowId(null);
-            }}
-          >
-            {CANCEL_SVG}
-          </button>
-          <button
-            title="Save"
+            title="Save Changes"
+            aria-label="Save Changes"
             style={styles.saveButton}
             tabIndex={0}
             onClick={(e) => {
@@ -247,6 +238,18 @@ const getColumns = ({ member, setMembersState }) => {
             }}
           >
             {SAVE_SVG}
+          </button>
+          <button
+            title="Cancel"
+            aria-label="Cancel"
+            style={styles.cancelButton}
+            tabIndex={0}
+            onClick={(e) => {
+              e.stopPropagation();
+              tableManager.rowEditApi.setEditRowId(null);
+            }}
+          >
+            {CANCEL_SVG}
           </button>
         </div>
       )

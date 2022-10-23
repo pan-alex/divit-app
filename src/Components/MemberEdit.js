@@ -36,10 +36,10 @@ export default function MemberEdit( {member, handleIsVisibleToggle} ) {
                     </div>
                 </div>
                 <div className='flex-center'>
-                <button className="btn btn-light" onClick={handleEditMember}>
+                <button className="btn btn-light" onClick={handleEditMember} aria-label='Save Changes'>
                     <Checkmark />
                 </button>
-                <button className="btn btn-light" onClick={handleIsVisibleToggle}>
+                <button className="btn btn-light" onClick={handleIsVisibleToggle} aria-label='Cancel'>
                     <Crossmark />
                 </button>
                 </div>
