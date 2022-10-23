@@ -14,8 +14,8 @@ export default function TransactionsList( {member, isVisible, handleIsVisibleTog
                 <div>
                     <TransactionNew member={member} />
                 </div>
-                <button className='btn btn-outline-secondary' onClick={handleIsVisibleToggle}>
-                    Collapse
+                <button className='btn btn-light' onClick={handleIsVisibleToggle}>
+                ︿
                 </button>
             </>
 

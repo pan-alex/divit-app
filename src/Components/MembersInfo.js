@@ -29,7 +29,7 @@ export default function MembersInfo() {
                 { memberInfo }
             </div>
             <section className="newMember">
-                <button arial-label='Add new member' onClick={handleNewMember}>+</button>
+                <button className='btn btn-light' arial-label='Add new member' onClick={handleNewMember}>+</button>
             </section>
         </>
     )
