@@ -5,23 +5,19 @@ import TransactionNew from "./TransactionNew"
 export default function TransactionsList( {member, isVisible, handleIsVisibleToggle} ) {
     member.transactions.sort( (a, b) => new Date(b.date) - new Date(a.date) )
 
-    if (isVisible > 0) {
-        return (
-            <>
-                <div className="transactionsListing">
-                    <SyncTable member={member} transactions={member.transactions} />
-                </div>
-                <div>
-                    <TransactionNew member={member} />
-                </div>
-                <button className='btn btn-light' onClick={handleIsVisibleToggle}>
-                ︿
-                </button>
-            </>
+    let classes = isVisible > 0 ? '' : 'hide'
+    return (
+        <div className={classes}>
+            <div className="transactionsListing">
+                <SyncTable member={member} transactions={member.transactions} />
+            </div>
+            <div>
+                <TransactionNew member={member} />
+            </div>
+            <button className='btn btn-light' onClick={handleIsVisibleToggle}>
+            ︿
+            </button>
+        </div>
 
         )
-    } else {
-        return <></>
-    }
-
 }
