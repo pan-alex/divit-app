@@ -113,7 +113,7 @@ const getColumns = ({ member, setMembersState }) => {
         id: "2",
         field: "date",
         label: "Date",
-        width: "150px",
+        width: "minmax(140px, 25%)",
         editorCellRenderer: ({
             tableManager,
             value,
@@ -136,17 +136,19 @@ const getColumns = ({ member, setMembersState }) => {
       id: "3",
       field: "category",
       label: "Category",
+      width: "minmax(auto, 20%)",
     },
     {
       id: "4",
       field: "description",
-      label: "Note"
+      label: "Note",
+      width: "minmax(auto, 40%)",
     },
     {
       id: "5",
       field: "cost",
       label: "Amount",
-      width: "120px",
+      width: "minmax(auto, 15%)",
       cellRenderer: ({
         tableManager,
         value,
