@@ -7,7 +7,7 @@ const EDIT_SVG = (
     height="25"
     viewBox="0 0 25 25"
     width="25"
-    stroke-width='1'
+    strokeWidth='1'
     xmlns="http://www.w3.org/2000/svg"
   >
     <g fill="#fff" stroke="#1856bf" transform="translate(4 4)">
@@ -24,7 +24,7 @@ const CANCEL_SVG = (
     height="25"
     viewBox="0 0 25 25"
     width="25"
-    stroke-width='2'
+    strokeWidth='2'
     xmlns="http://www.w3.org/2000/svg"
   >
     <g fill="none" stroke="#dc1e1e" transform="translate(7 7)">
@@ -38,7 +38,7 @@ const SAVE_SVG = (
     height="25"
     viewBox="0 0 25 25"
     width="25"
-    stroke-width='2'
+    strokeWidth='2'
     xmlns="http://www.w3.org/2000/svg"
   >
     <path

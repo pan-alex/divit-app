@@ -15,7 +15,7 @@ export default function MemberInfo( {member} ) {
     }
 
     return (
-        <div className='container-sm' style={{'maxWidth': '1000px'}}>
+        <div className='container-sm'>
             <div className='card'>
                 <MemberHeader member={member} handleToggleTransactionList={handleToggleTransactionList}/>
                 <TransactionsList
