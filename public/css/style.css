@@ -112,7 +112,6 @@ input[type=number] {
     line-height: 0;
 }
 
-
 /* Member Menu pop-up; match style to react grid table */
 div.css-r6z5ec {
     z-index: 4;
@@ -121,9 +120,14 @@ div.css-r6z5ec {
     box-shadow: 1px 1px 4px 0 var(--rgt-shadow-color);
 }
 
+
 .chakra-menu__menuitem {
     background: none;
     border: none;
+}
+
+.chakra-modal__content {
+    top: 25%;
 }
 
 .chakra-modal__content button {
