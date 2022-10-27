@@ -19,7 +19,8 @@ export default function TransactionNew( { member } ) {
 
 
     return (
-        <>
+        <div>
+            <h4>New Transaction</h4>
             <div className="newTransaction flex-form">
                 <div className='form-floating'>
                     <input type="date" id={'new-date-' + member.name} name="date" className="date form-control" defaultValue={new Date().toISOString().slice(0,10)}/>
@@ -41,7 +42,7 @@ export default function TransactionNew( { member } ) {
                         Add
                 </button>
             </div>
-        </>
+        </div>
     )
 
 
