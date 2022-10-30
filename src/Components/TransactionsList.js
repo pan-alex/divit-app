@@ -16,10 +16,11 @@ export default function TransactionsList( {member, isVisible, handleIsVisibleTog
             <div className="transactionsList">
                 <h4>{transactionHeader}</h4>
                 <SyncTable member={member} transactions={member.transactions} />
+                <button className='btn btn-light' onClick={handleIsVisibleToggle}>
+                ︿
+                </button>
             </div>
-            <button className='btn btn-light' onClick={handleIsVisibleToggle}>
-            ︿
-            </button>
+
         </div>
 
         )
