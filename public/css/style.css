@@ -57,6 +57,19 @@ input[type=number] {
     justify-content: space-between;
 }
 
+/* Header */
+
+header {
+    padding: 0.3rem 1.5rem;
+    background-color: #dcd2cc;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+}
+
+
 
 /* Card component */
 .card-body, .card-header {
