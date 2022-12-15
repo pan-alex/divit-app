@@ -29,7 +29,7 @@ export default function MemberDelete( {member} ) {
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Modal Title</ModalHeader>
+                    <ModalHeader>Delete Member?</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                         <p>Are you sure you want to delete <strong>{member.name}</strong>?</p>
