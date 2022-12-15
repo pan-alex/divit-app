@@ -5,6 +5,10 @@ Features:
 
 + Calculate best way to balance uneven expenses in the least number of transactions
 
+- Import / export JSON
+
+- Export Excel
+
 - Calculate how best to split rooms / expenses using a bidding system
 	- Requires backend with the features in the next point.
 

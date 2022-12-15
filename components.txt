@@ -1,6 +1,7 @@
 |- App [ membersState ]
     > Context: [memberState, setMemberState]
 
+    |- ImportExportData
 
     |- Members info ( { member} )
         |- Member info ( { member} )
@@ -13,7 +14,6 @@
                     |- getColumns( {transactions, member, setMemberState} )
                     |- Information( {member, setMemberState} )
                 |- New Transaction ( { member } )
-
 
     |- RepaymentsBox
         |-

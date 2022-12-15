@@ -2,8 +2,7 @@
 // Controls state for group.members
 import { group } from './Classes'
 import MemberInfo from './MemberInfo'
-// import MemberNew from './MemberNew'
-// import { useState } from 'react'
+
 import { useContext } from 'react'
 import { GroupContext } from '../App'
 

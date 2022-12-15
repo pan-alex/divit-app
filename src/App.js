@@ -2,6 +2,7 @@ import { useState, createContext } from 'react';
 import {group} from './Components/Classes';
 import MembersInfo from './Components/MembersInfo';
 import RepaymentsBox from './Components/RepaymentsBox';
+import ImportExportData from './Components/ImportExportData';
 
 export const GroupContext = createContext()
 
@@ -19,6 +20,7 @@ function App() {
     return (
         <div className="App">
             <GroupContext.Provider value={[membersState, updateMembersState]}>
+                <ImportExportData />
                 <MembersInfo />
                 <RepaymentsBox />
             </GroupContext.Provider>
