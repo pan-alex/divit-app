@@ -1,5 +1,7 @@
 |- App [ membersState ]
     > Context: [memberState, setMemberState]
+
+
     |- Members info ( { member} )
         |- Member info ( { member} )
             |- MemberHeader ( {member, handleClick})
@@ -11,7 +13,7 @@
                     |- getColumns( {transactions, member, setMemberState} )
                     |- Information( {member, setMemberState} )
                 |- New Transaction ( { member } )
-        |- MemberNew ( { membersState } )
+
 
     |- RepaymentsBox
         |-
