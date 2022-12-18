@@ -76,11 +76,11 @@ h1 {
 
 .importExportData {
     margin-inline: auto;
-    margin-top: 1rem;
+    margin-block: 1rem;
     padding: 1rem;
     border: 1px solid var(--bs-border-color);
     border-radius: 5px;
-    max-width: 400px;
+    max-width: 500px;
 }
 
 .importExportData > div {
@@ -88,6 +88,8 @@ h1 {
 }
 
 #jsonUpload {
+    position: absolute;
+    left: -99999px;
     opacity: 0;
     height: 1px;
     width: 1px;

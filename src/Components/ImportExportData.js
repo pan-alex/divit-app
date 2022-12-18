@@ -39,9 +39,11 @@ function transactionsToCSV() {
 
 function ExportAsJSON() {
     return (
-        <button onClick={groupToJSON} className='btn btn-light'>
+        <div>
+            <button onClick={groupToJSON} className='btn btn-light'>
             Export JSON
-        </button>
+            </button>
+        </div>
     )
 }
 
@@ -56,9 +58,11 @@ function ImportAsJSON() {
 
 function ExportAsCSV() {
     return (
-        <button onClick={transactionsToCSV} className='btn btn-light'>
-            Export CSV
-        </button>
+        <div>
+            <button onClick={transactionsToCSV} className='btn btn-light'>
+                Export CSV
+            </button>
+        </div>
     )
 }
 

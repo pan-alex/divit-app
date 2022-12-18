@@ -20,9 +20,9 @@ function App() {
     return (
         <div className="App">
             <GroupContext.Provider value={[membersState, updateMembersState]}>
-                <ImportExportData />
                 <MembersInfo />
                 <RepaymentsBox />
+                <ImportExportData />
             </GroupContext.Provider>
         </div>
     );
