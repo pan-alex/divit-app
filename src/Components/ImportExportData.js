@@ -23,6 +23,20 @@ function JSONToGroup(e) {
     }
 }
 
+function transactionsToCSV() {
+    let rows = 'Member ID,Member Name,Transaction ID,Date,Category,Note,Amount';
+    for (let member of group.members) {
+        for (let tx of member.transactions) {
+            rows += `\n${member.id},${member.name},${tx.id},${tx.date},${tx.category},${tx.description},${tx.cost}`
+        }
+    }
+    let a = document.createElement('a')
+    let file = new Blob([rows], {type: 'application/csv'})
+    a.href = URL.createObjectURL(file)
+    a.download = `divit-${new Date().toISOString()}.csv`
+    a.click()
+}
+
 function ExportAsJSON() {
     return (
         <button onClick={groupToJSON} className='btn btn-light'>
@@ -40,11 +54,20 @@ function ImportAsJSON() {
     )
 }
 
+function ExportAsCSV() {
+    return (
+        <button onClick={transactionsToCSV} className='btn btn-light'>
+            Export CSV
+        </button>
+    )
+}
+
 export default function ImportExportData() {
     return (
         <div className='importExportData flex-center'>
             <ImportAsJSON />
             <ExportAsJSON />
+            <ExportAsCSV />
         </div>
     )
 }
