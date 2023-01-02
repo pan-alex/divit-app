@@ -1,22 +1,33 @@
 |- App [ membersState ]
-    > Context: [memberState, setMemberState]
+    > GroupContext ( {, updateMembersState} )
 
-    |- ImportExportData
+        |- MembersInfo
+            \  MemberInfo ( { member} )
+                |- MemberHeader ( {member, handleToggleTransactionList})
+                    |- MemberEdit ( { member, handleIsVisibleToggle } )
+                    |- MemberHeaderInfo ( {member} )
+                    \  MemberMenu ( {member, toggleMemberEdit} )
+                \ Transaction List ( { member, isVisible, handleIsVisibleToggle } )
+                    |- SyncTable ( {member, transactions } )
+                        |- getColumns ( {transactions, member, setMemberState} )
+                        \ SyncTableInformation ( {member, setMemberState} )
+                    \  New Transaction ( { member } )
 
-    |- Members info ( { member} )
-        |- Member info ( { member} )
-            |- MemberHeader ( {member, handleClick})
-                |- MemberHeaderInfo ( {member} )
-                |- MemberMenu ( {member} )
-            |- Edit member info ( { member } )
-             \ Transaction List ( { member } )
-                |- SyncTable ( {member, transactions } )
-                    |- getColumns( {transactions, member, setMemberState} )
-                    |- Information( {member, setMemberState} )
-                |- New Transaction ( { member } )
+        |- RepaymentsBox
 
-    |- RepaymentsBox
-        |-
-        |- Repayments List
+        \ ImportExportData
 
-    |- Reset
+
+GroupContext:
+    ```
+    [, setMembers] = useState(group.members)
+    function updateMembersState() {
+      setMembers(prev => { return {...prev} })
+    }
+    ```
+
+    Explanation:
+    - State tied to group.members
+    - State value is undefined; built-in Group methods are used to update `group`.
+    - setState value is setMembers. The Context passed to child components is the setter `updateMembersState()`.
+    - Built-in Group methods are used to update `group`, and state setter is used to trigger re-render.
