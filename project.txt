@@ -1,16 +1,7 @@
-Features:
-+ Calculate how best to split expenses among n people
-	+ Including asymmetrical splits
-		+ E.g., based on hours worked (tips) or %
+=== To Do ===
 
-+ Calculate best way to balance uneven expenses in the least number of transactions
-
-- Import / export JSON
-
-- Export Excel
-
-- Calculate how best to split rooms / expenses using a bidding system
-	- Requires backend with the features in the next point.
+== Features ==
+- Feedback button / contact form
 
 - Have the ability to log in:
 	- Store: Expenses, date, category
@@ -19,10 +10,44 @@ Features:
 
 - Have the ability to share a link w/ a password to friends so that they can input into the sheet without creating an account.
 
+- Calculate how best to split rooms / expenses using a bidding system
 
-Improvements:
-- Add layout
+
+
+== Bug fixes ==
+- Style: In transaction table, putting a row into edit mode casuses other "edit" buttons to stretch.
+
+
+
+== Improvements ==
+- Improve mobile layout
+	- Transction Table column sizes
 
 - Add styling
+	- Colour palette
+	- Font theme
+	- Input fields
+	- Add dark vs. light mode
+	- Improve style consistency across libraries/components
+		- Grid React Table
 
-- Implement React for UI
+- Input validations
+	- Force 2 decimal places on number inputs
+
+- Improve JSON import (i.e., no refresh required to load in)
+
+- Implement library with more robust handling of maths with currencies.
+
+
+
+=== Completed ===
+
+== Features ==
++ Calculate how best to split expenses among n people
+	+ Including asymmetrical splits
+
++ Calculate best way to balance uneven expenses in the least number of transactions
+
++ Import / export
+	+ Import / export JSON
+	+ Export Excel
