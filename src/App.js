@@ -7,7 +7,7 @@ import ImportExportData from './Components/ImportExportData';
 export const GroupContext = createContext()
 
 function App() {
-  const [, setMembers] = useState(group.members)
+  const [membersState, setMembers] = useState(group.members)
 
   function updateMembersState() {
       setMembers(prev => { return {...prev} })
@@ -19,7 +19,7 @@ function App() {
 
     return (
         <div className="App">
-            <GroupContext.Provider value={[, updateMembersState]}>
+            <GroupContext.Provider value={[membersState, updateMembersState]}>
                 <MembersInfo />
                 <RepaymentsBox />
                 <ImportExportData />
